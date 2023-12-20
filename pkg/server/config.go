@@ -18,6 +18,10 @@ type Config struct {
 	Context context.Context `yaml:"-" toml:"-" json:"-"`
 	Logger  slog.Logger     `yaml:"-" toml:"-" json:"-"`
 
+	Name    string `yaml:"name"    default:"localhost"`
+	Version string `yaml:"version" default:"unspecified"`
+	Authors string `yaml:"authors" default:"JPI Technologies <oss@jpi.io>"`
+
 	// ExchangeTimeout indicates the deadline to be used on DNS requests
 	ExchangeTimeout time.Duration `yaml:"exchange_timeout" default:"5s"`
 
