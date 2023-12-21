@@ -12,6 +12,15 @@
             "program": "${fileDirname}",
             "args": [ "serve", "-vvv" ],
             "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "dump this",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${fileDirname}",
+            "args": [ "dump", "-F", "json", "-vvv" ],
+            "cwd": "${workspaceFolder}"
         }
     ]
 }
