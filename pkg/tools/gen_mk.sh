@@ -81,7 +81,7 @@ EOT
 		#
 		$(cat <<-EOL | packed_oneline
 			set -e
-			FILES="\$\$(\$(GO) list -f '{{len .GoFiles}}')"
+			FILES="\$\$(\$(GO) list -f '{{len .GoFiles}}' ./...)"
 			if [ -n "\$\$FILES" ]; then
 				\$(GO) vet ./...
 				\$(REVIVE) \$(REVIVE_RUN_ARGS) ./...
