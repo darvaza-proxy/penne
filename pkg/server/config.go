@@ -29,5 +29,13 @@ func (cfg *Config) SetDefaults() error {
 		cfg.Logger = discard.New()
 	}
 
+	if len(cfg.Horizons) == 0 {
+		cfg.Horizons = defaultHorizons()
+	}
+
+	if len(cfg.Resolvers) == 0 {
+		cfg.Resolvers = defaultResolvers()
+	}
+
 	return nil
 }

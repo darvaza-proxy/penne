@@ -6,8 +6,12 @@ type Server struct {
 	cfg Config
 }
 
-func (*Server) init() error {
-	return nil
+func (srv *Server) init() error {
+	if err := srv.initResolvers(); err != nil {
+		return err
+	}
+
+	return srv.initHorizons()
 }
 
 // New creates a new [Server] based on the given [Config]
