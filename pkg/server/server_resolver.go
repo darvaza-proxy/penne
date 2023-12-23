@@ -1,8 +1,6 @@
 package server
 
 import (
-	"darvaza.org/core"
-
 	"darvaza.org/penne/pkg/resolver"
 )
 
@@ -15,6 +13,7 @@ func defaultResolvers() []resolver.Config {
 	}
 }
 
-func (*Server) initResolvers() error {
-	return core.ErrNotImplemented
+func (srv *Server) initResolvers() error {
+	_, _, err := resolver.MakeResolvers(srv.cfg.Resolvers, srv.cfg.Logger)
+	return err
 }
