@@ -1,9 +1,13 @@
 // Package server implements the Penne server
 package server
 
+import "darvaza.org/sidecar/pkg/sidecar/horizon"
+
 // Server is a Penne server
 type Server struct {
 	cfg Config
+
+	z horizon.Horizons
 }
 
 func (srv *Server) init() error {
