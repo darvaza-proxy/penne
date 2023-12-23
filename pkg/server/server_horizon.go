@@ -1,8 +1,6 @@
 package server
 
 import (
-	"darvaza.org/core"
-
 	"darvaza.org/penne/pkg/horizon"
 )
 
@@ -15,6 +13,7 @@ func defaultHorizons() []horizon.Config {
 	}
 }
 
-func (*Server) initHorizons() error {
-	return core.ErrNotImplemented
+func (srv *Server) initHorizons() error {
+	_, _, err := horizon.MakeHorizons(srv.cfg.Horizons, nil)
+	return err
 }
