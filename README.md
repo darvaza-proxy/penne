@@ -20,6 +20,9 @@ the [darvaza resolver interface][resolver].
 
 [split-horizon]: https://en.wikipedia.org/wiki/Split-horizon_DNS
 
+[ohmyglob]: https://pkg.go.dev/github.com/pachyderm/ohmyglob
+[gobwasglob]: https://pkg.go.dev/github.com/gobwas/glob
+
 ## Horizons
 
 _Penne_ is designed upon the idea of [_split horizons_][split-horizon],
@@ -48,6 +51,54 @@ _Resolvers_ act as middlewares, optionally restricted to specific domains (suffi
 
 _Resolvers_ can also be configured to discard various entries (like `AAAA` for example)
 and execute request rewrites.
+
+## Globing
+
+We use _globing_ instead of regular expressions for the name rewrites and suffix matching on _Resolvers_.
+
+For this purpose we worked with [pachyderm's Oh my glob!][ohmyglob] library, which
+in turn was derived from the excellent [github.com/gobwas/glob][gobwasglob] with
+the following syntax.
+
+```
+pattern:
+    { term }
+
+term:
+    `*`         matches any sequence of non-separator characters
+    `**`        matches any sequence of characters
+    `?`         matches any single non-separator character
+    `[` [ `!` ] { character-range } `]`
+                character class (must be non-empty)
+    `{` pattern-list `}`
+                pattern alternatives
+    c           matches character c (c != `*`, `**`, `?`, `\`, `[`, `{`, `}`)
+    `\` c       matches character c
+
+character-range:
+    c           matches character c (c != `\\`, `-`, `]`)
+    `\` c       matches character c
+    lo `-` hi   matches character c for lo <= c <= hi
+
+pattern-list:
+    pattern { `,` pattern }
+                comma-separated (without spaces) patterns
+
+capture:
+    `(` { `|` pattern } `)`
+    `@(` { `|` pattern } `)`
+                match and capture one of pipe-separated sub-patterns
+    `*(` { `|` pattern } `)`
+                match and capture any number of the pipe-separated sub-patterns
+    `+(` { `|` pattern } `)`
+                match and capture one or more of the pipe-separated sub-patterns
+    `?(` { `|` pattern } `)`
+                match and capture zero or one of the pipe-separated sub-patterns
+    `!(` { `|` pattern } `)`
+                match and capture anything except one of the pipe-separated sub-patterns
+```
+
+And for replacements `${n}` and `$n` to indicate the index on the capture slice inside a literal string.
 
 ## Server
 
