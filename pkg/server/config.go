@@ -2,6 +2,9 @@ package server
 
 import (
 	"context"
+	"time"
+
+	"github.com/amery/defaults"
 
 	"darvaza.org/slog"
 	"darvaza.org/slog/handlers/discard"
@@ -14,6 +17,9 @@ import (
 type Config struct {
 	Context context.Context `yaml:"-" toml:"-" json:"-"`
 	Logger  slog.Logger     `yaml:"-" toml:"-" json:"-"`
+
+	// ExchangeTimeout indicates the deadline to be used on DNS requests
+	ExchangeTimeout time.Duration `yaml:"exchange_timeout" default:"5s"`
 
 	Horizons  []horizon.Config  `yaml:"horizons,omitempty" toml:",omitempty" json:",omitempty"`
 	Resolvers []resolver.Config `yaml:"resolvers,omitempty" toml:",omitempty" json:",omitempty"`
@@ -37,5 +43,6 @@ func (cfg *Config) SetDefaults() error {
 		cfg.Resolvers = defaultResolvers()
 	}
 
-	return nil
+	// and the rest
+	return defaults.Set(cfg)
 }

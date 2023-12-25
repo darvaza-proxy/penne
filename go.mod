@@ -11,6 +11,7 @@ require (
 )
 
 require (
+	github.com/amery/defaults v0.1.0
 	github.com/mgechev/revive v1.3.4
 	github.com/miekg/dns v1.1.57
 )

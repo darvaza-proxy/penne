@@ -3,6 +3,8 @@ package server
 import (
 	"github.com/miekg/dns"
 
+	"darvaza.org/slog"
+
 	"darvaza.org/penne/pkg/resolver"
 )
 
@@ -22,6 +24,11 @@ func defaultResolvers() []resolver.Config {
 func (srv *Server) initResolvers() error {
 	_, _, err := resolver.MakeResolvers(srv.cfg.Resolvers, srv.cfg.Logger)
 	return err
+}
+
+func (*Server) reflectEnabled(_ string) (slog.LogLevel, bool) {
+	// TODO: make this configurable
+	return slog.Debug, true
 }
 
 // ServeDNS handles dns requests based on the IP address of the client
