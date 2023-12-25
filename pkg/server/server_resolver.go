@@ -26,7 +26,12 @@ func defaultResolvers() []resolver.Config {
 }
 
 func (srv *Server) initResolvers() error {
-	_, _, err := resolver.MakeResolvers(srv.cfg.Resolvers, srv.cfg.Logger)
+	// build resolvers
+	opts := &resolver.Options{
+		Logger: srv.cfg.Logger,
+	}
+
+	_, _, err := resolver.MakeResolvers(srv.cfg.Resolvers, opts)
 	return err
 }
 

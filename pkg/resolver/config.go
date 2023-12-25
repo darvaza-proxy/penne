@@ -1,6 +1,11 @@
 package resolver
 
-// Config describes a [Resolver]
+import (
+	"darvaza.org/resolver"
+	"darvaza.org/sidecar/pkg/sidecar/horizon"
+)
+
+// Config describes a [Resolver].
 type Config struct {
 	Name string `yaml:"name"`
 	Next string `yaml:"next,omitempty" toml:",omitempty" json:",omitempty"`
@@ -14,7 +19,27 @@ type Config struct {
 	Rewrites []RewriteConfig `yaml:"rewrite,omitempty" toml:",omitempty" json:",omitempty"`
 }
 
-// RewriteConfig describes an expression used to alter a request
+// New creates a new [Resolver].
+func (rc Config) New(next resolver.Exchanger, opts *Options) (*Resolver, error) {
+	if opts == nil {
+		opts = new(Options)
+	}
+	opts.SetDefaults()
+
+	r := &Resolver{
+		log:      opts.Logger,
+		name:     rc.Name,
+		suffixes: rc.Suffixes,
+
+		Next:      next,
+		Exchanger: resolver.ExchangerFunc(horizon.ForbiddenExchange),
+	}
+
+	// TODO: set them up to do something
+	return r, nil
+}
+
+// RewriteConfig describes an expression used to alter a request.
 type RewriteConfig struct {
 	From string `yaml:"from,omitempty" toml:",omitempty" json:",omitempty"`
 	To   string `yaml:"to,omitempty" toml:",omitempty" json:",omitempty"`
