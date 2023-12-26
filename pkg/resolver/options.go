@@ -1,6 +1,9 @@
 package resolver
 
 import (
+	"github.com/miekg/dns"
+
+	"darvaza.org/resolver/pkg/client"
 	"darvaza.org/slog"
 	"darvaza.org/slog/handlers/discard"
 )
@@ -15,4 +18,9 @@ func (opts *Options) SetDefaults() {
 	if opts.Logger == nil {
 		opts.Logger = discard.New()
 	}
+}
+
+// NewClient uses the [Options] to create a new [dns.Client].
+func (*Options) NewClient(net string) client.Client {
+	return &dns.Client{Net: net}
 }
