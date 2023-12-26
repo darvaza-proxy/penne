@@ -15,7 +15,7 @@ var (
 )
 
 // MakeResolvers builds resolvers from a [Config] slice.
-func MakeResolvers(conf []Config,
+func MakeResolvers(conf []Config, debug map[string]slog.LogLevel,
 	opts *Options) ([]string, map[string]resolver.Exchanger, error) {
 	//
 	if conf == nil {
@@ -35,6 +35,9 @@ func MakeResolvers(conf []Config,
 		}
 	}
 
+	if debug != nil {
+		makeResolverSetDebug(res, debug)
+	}
 	return names, res, nil
 }
 
@@ -98,6 +101,16 @@ func makeResolversMap(conf []Config) ([]string, map[string]Config, error) {
 	return names, out, nil
 }
 
+func makeResolverSetDebug(res map[string]resolver.Exchanger,
+	debug map[string]slog.LogLevel) {
+	//
+	for _, e := range res {
+		if r, ok := e.(*Resolver); ok {
+			r.copyDebugMap(debug)
+		}
+	}
+}
+
 func nextMakeResolvers(res map[string]resolver.Exchanger,
 	conf map[string]Config) (string, resolver.Exchanger, error) {
 	//
@@ -141,6 +154,7 @@ func getMakeResolvers(name string,
 type Resolver struct {
 	resolver.Exchanger
 
+	debug    map[string]slog.LogLevel
 	log      slog.Logger
 	name     string
 	suffixes []string
@@ -155,4 +169,14 @@ func (r *Resolver) Name() string {
 
 func (r *Resolver) String() string {
 	return fmt.Sprintf("resolver[%q]", r.name)
+}
+
+func (r *Resolver) copyDebugMap(debug map[string]slog.LogLevel) bool {
+	if len(r.debug) > 0 {
+		for k, v := range r.debug {
+			debug[k] = v
+		}
+		return true
+	}
+	return false
 }

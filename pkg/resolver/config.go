@@ -3,6 +3,7 @@ package resolver
 import (
 	"darvaza.org/resolver"
 	"darvaza.org/sidecar/pkg/sidecar/horizon"
+	"darvaza.org/slog"
 )
 
 // Config describes a [Resolver].
@@ -27,6 +28,7 @@ func (rc Config) New(next resolver.Exchanger, opts *Options) (*Resolver, error) 
 	opts.SetDefaults()
 
 	r := &Resolver{
+		debug:    make(map[string]slog.LogLevel),
 		log:      opts.Logger,
 		name:     rc.Name,
 		suffixes: rc.Suffixes,

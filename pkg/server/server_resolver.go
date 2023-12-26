@@ -31,7 +31,7 @@ func (srv *Server) initResolvers() error {
 		Logger: srv.cfg.Logger,
 	}
 
-	_, _, err := resolver.MakeResolvers(srv.cfg.Resolvers, opts)
+	_, _, err := resolver.MakeResolvers(srv.cfg.Resolvers, nil, opts)
 	return err
 }
 
