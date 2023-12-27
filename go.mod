@@ -16,9 +16,12 @@ require (
 	github.com/mgechev/revive v1.3.4
 	github.com/miekg/dns v1.1.57
 	github.com/spf13/cobra v1.8.0
+	github.com/spf13/pflag v1.0.5
 )
 
 require (
+	darvaza.org/slog/handlers/filter v0.4.6 // indirect
+	darvaza.org/slog/handlers/zerolog v0.4.6 // indirect
 	github.com/BurntSushi/toml v1.3.2 // indirect
 	github.com/chavacava/garif v0.1.0 // indirect
 	github.com/fatih/color v1.16.0 // indirect
@@ -33,7 +36,7 @@ require (
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/rs/zerolog v1.31.0 // indirect
 	golang.org/x/mod v0.14.0 // indirect
 	golang.org/x/net v0.19.0 // indirect
 	golang.org/x/sync v0.5.0 // indirect

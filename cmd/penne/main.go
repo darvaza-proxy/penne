@@ -2,12 +2,12 @@
 package main
 
 import (
-	"log"
 	"os"
 
 	"github.com/spf13/cobra"
 
 	"darvaza.org/sidecar/pkg/service"
+	"darvaza.org/slog"
 )
 
 const (
@@ -25,7 +25,9 @@ func main() {
 	code, err := service.AsExitStatus(err)
 
 	if err != nil {
-		log.Print(err)
+		mustLogger(nil, nil).Error().
+			WithField(slog.ErrorFieldName, err).
+			Print()
 	}
 
 	os.Exit(code)
