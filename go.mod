@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	darvaza.org/core v0.11.0
-	darvaza.org/resolver v0.7.15
+	darvaza.org/resolver v0.7.16
 	darvaza.org/sidecar v0.1.0
 	darvaza.org/slog v0.5.4
 	darvaza.org/slog/handlers/discard v0.4.6

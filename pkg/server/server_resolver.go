@@ -30,7 +30,7 @@ func (srv *Server) initResolvers() error {
 	return err
 }
 
-func (*Server) reflectEnabled(_ string) (slog.LogLevel, bool) {
+func (*Server) reflectEnabled(_ context.Context, _ string) (slog.LogLevel, bool) {
 	// TODO: make this configurable
 	return slog.Debug, true
 }
