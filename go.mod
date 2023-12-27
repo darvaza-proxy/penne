@@ -2,6 +2,16 @@ module darvaza.org/penne
 
 go 1.20
 
+replace (
+	darvaza.org/resolver => ../resolver
+	darvaza.org/sidecar => ../sidecar
+	darvaza.org/sidecar/pkg/service => ../sidecar/pkg/service
+	darvaza.org/x/config => ../x/config
+	darvaza.org/x/net => ../x/net
+	darvaza.org/x/tls => ../x/tls
+	darvaza.org/x/web => ../x/web
+)
+
 require (
 	darvaza.org/cache/x/simplelru v0.1.8 // indirect
 	darvaza.org/core v0.12.0
@@ -12,6 +22,7 @@ require (
 	darvaza.org/sidecar v0.3.9
 	darvaza.org/sidecar/pkg/service v0.0.8
 	darvaza.org/slog v0.5.7
+	darvaza.org/slog/handlers/cblog v0.5.9 // indirect
 	darvaza.org/slog/handlers/discard v0.4.11
 	darvaza.org/slog/handlers/filter v0.4.9 // indirect
 	darvaza.org/slog/handlers/zerolog v0.4.9 // indirect
