@@ -65,28 +65,37 @@ func globPrintResult(g *glob.Glob, t *glob.Template, fixture string) bool {
 }
 
 func globNewPattern(flags *pflag.FlagSet, args []string) (*glob.Glob, []string, error) {
+	var s string
+	var ok bool
+
 	flag := flags.Lookup(globPatternFlag)
 	switch {
 	case flag == nil:
 		panic("unreachable")
 	case flag.Changed:
-		s := flag.Value.String()
-		_, _ = fmt.Println("Glob:", s)
-		g, err := glob.Compile(s, '.')
-		return g, args, err
+		s = flag.Value.String()
+		ok = true
 	case len(args) > 0:
-		s := args[0]
+		s = args[0]
 		args = args[1:]
-		_, _ = fmt.Println("Glob:", s)
-		g, err := glob.Compile(s, '.')
-		return g, args, err
-	default:
+		ok = true
+	}
+
+	if !ok {
 		err := &service.ErrorExitCode{
 			Code: 1,
 			Err:  errors.New("no pattern specified"),
 		}
 		return nil, nil, err
 	}
+
+	_, _ = fmt.Println("Glob:", s)
+	g, err := glob.Compile(s, '.')
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return g, args, nil
 }
 
 func globNewTemplate(flags *pflag.FlagSet) (*glob.Template, error) {
