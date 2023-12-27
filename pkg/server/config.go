@@ -18,6 +18,14 @@ type Config struct {
 	Context context.Context `yaml:"-" toml:"-" json:"-"`
 	Logger  slog.Logger     `yaml:"-" toml:"-" json:"-"`
 
+	Name    string `yaml:"name"    default:"localhost"`
+	Version string `yaml:"version" default:"unspecified"`
+	Authors string `yaml:"authors" default:"JPI Technologies <oss@jpi.io>"`
+
+	// DisableCHAOS makes the DNS server respond with an empty success instead of giving
+	// away software information.
+	DisableCHAOS bool `yaml:"disable_chaos,omitempty" toml:",omitempty" json:",omitempty"`
+
 	// ExchangeTimeout indicates the deadline to be used on DNS requests
 	ExchangeTimeout time.Duration `yaml:"exchange_timeout" default:"5s"`
 
