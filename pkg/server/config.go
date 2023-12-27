@@ -22,6 +22,10 @@ type Config struct {
 	Version string `yaml:"version" default:"unspecified"`
 	Authors string `yaml:"authors" default:"JPI Technologies <oss@jpi.io>"`
 
+	// DisableCHAOS makes the DNS server respond with an empty success instead of giving
+	// away software information.
+	DisableCHAOS bool `yaml:"disable_chaos,omitempty" toml:",omitempty" json:",omitempty"`
+
 	// ExchangeTimeout indicates the deadline to be used on DNS requests
 	ExchangeTimeout time.Duration `yaml:"exchange_timeout" default:"5s"`
 

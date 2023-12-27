@@ -13,6 +13,10 @@ import (
 func (srv *Server) ExchangeCHAOS(_ context.Context, req *dns.Msg) (*dns.Msg, error) {
 	var answers []dns.RR
 
+	if srv.cfg.DisableCHAOS {
+		return handleRcodeSuccess(req, []dns.RR{})
+	}
+
 	exdns.ForEachQuestionOfClass(req, dns.ClassCHAOS, func(q dns.Question) {
 		rr, ok := srv.chaosAnswer(q)
 		if ok {
