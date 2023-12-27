@@ -2,6 +2,13 @@ module darvaza.org/penne
 
 go 1.20
 
+replace (
+	darvaza.org/resolver => ../resolver
+	darvaza.org/sidecar => ../sidecar
+	darvaza.org/sidecar/pkg/service => ../sidecar/pkg/service
+	darvaza.org/x => ../x
+)
+
 require (
 	darvaza.org/core v0.12.0
 	darvaza.org/darvaza/shared v0.5.12
