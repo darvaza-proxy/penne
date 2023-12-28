@@ -1,17 +1,24 @@
 // Package server implements the Penne server
 package server
 
-import "darvaza.org/sidecar/pkg/sidecar/horizon"
+import (
+	"darvaza.org/darvaza/shared/storage"
+	"darvaza.org/sidecar/pkg/sidecar/horizon"
+)
 
 // Server is a Penne server
 type Server struct {
 	cfg Config
 
+	// TLS
+	tls storage.Store
+	// horizons
 	z horizon.Horizons
 }
 
 func (srv *Server) init() error {
 	for _, fn := range []func() error{
+		srv.initTLS,
 		srv.initResolvers,
 		srv.initHorizons,
 	} {
