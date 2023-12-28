@@ -6,6 +6,11 @@ import (
 )
 
 func (cfg *Config) export(s storage.Store) (*sidecar.Config, error) {
+	addrs := make([]string, 0, len(cfg.Listen.Addresses))
+	for _, addr := range cfg.Listen.Addresses {
+		addrs = append(addrs, addr.String())
+	}
+
 	scc := &sidecar.Config{
 		Context: cfg.Context,
 		Logger:  cfg.Logger,
@@ -14,6 +19,17 @@ func (cfg *Config) export(s storage.Store) (*sidecar.Config, error) {
 		Name: cfg.Name,
 
 		Supervision: cfg.Supervision,
+
+		Addresses: sidecar.BindConfig{
+			Interfaces: cfg.Listen.Interfaces,
+			Addresses:  addrs,
+		},
+
+		HTTP: sidecar.HTTPConfig{
+			Port:           cfg.Listen.HTTPS,
+			PortInsecure:   cfg.Listen.HTTP,
+			EnableInsecure: !cfg.Listen.DisableHTTP,
+		},
 	}
 
 	if err := scc.SetDefaults(); err != nil {
