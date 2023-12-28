@@ -11,11 +11,16 @@ type Server struct {
 }
 
 func (srv *Server) init() error {
-	if err := srv.initResolvers(); err != nil {
-		return err
+	for _, fn := range []func() error{
+		srv.initResolvers,
+		srv.initHorizons,
+	} {
+		if err := fn(); err != nil {
+			return err
+		}
 	}
 
-	return srv.initHorizons()
+	return nil
 }
 
 // New creates a new [Server] based on the given [Config]
