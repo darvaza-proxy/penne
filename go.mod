@@ -12,7 +12,7 @@ require (
 )
 
 require (
-	github.com/amery/defaults v0.1.0
+	darvaza.org/darvaza/shared/config v0.2.7
 	github.com/mgechev/revive v1.3.4
 	github.com/miekg/dns v1.1.57
 	github.com/spf13/cobra v1.8.0
@@ -20,10 +20,10 @@ require (
 )
 
 require (
-	darvaza.org/darvaza/shared/config v0.2.7 // indirect
 	darvaza.org/slog/handlers/filter v0.4.6 // indirect
 	darvaza.org/slog/handlers/zerolog v0.4.6 // indirect
 	github.com/BurntSushi/toml v1.3.2 // indirect
+	github.com/amery/defaults v0.1.0 // indirect
 	github.com/chavacava/garif v0.1.0 // indirect
 	github.com/dlclark/regexp2 v1.10.0 // indirect
 	github.com/fatih/color v1.16.0 // indirect
