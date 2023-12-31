@@ -6,8 +6,8 @@ require (
 	darvaza.org/core v0.11.2
 	darvaza.org/darvaza/shared v0.5.11
 	darvaza.org/darvaza/shared/config v0.2.7
-	darvaza.org/resolver v0.7.17
-	darvaza.org/sidecar v0.3.1
+	darvaza.org/resolver v0.7.18
+	darvaza.org/sidecar v0.3.2
 	darvaza.org/sidecar/pkg/service v0.0.4
 	darvaza.org/slog v0.5.5
 	darvaza.org/slog/handlers/discard v0.4.7
