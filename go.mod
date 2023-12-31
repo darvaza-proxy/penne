@@ -5,7 +5,7 @@ go 1.20
 require (
 	darvaza.org/core v0.11.0
 	darvaza.org/resolver v0.7.16
-	darvaza.org/sidecar v0.2.1
+	darvaza.org/sidecar v0.2.2
 	darvaza.org/sidecar/pkg/service v0.0.4
 	darvaza.org/slog v0.5.4
 	darvaza.org/slog/handlers/discard v0.4.6
@@ -20,7 +20,7 @@ require (
 )
 
 require (
-	darvaza.org/darvaza/shared/config v0.2.5 // indirect
+	darvaza.org/darvaza/shared/config v0.2.7 // indirect
 	darvaza.org/slog/handlers/filter v0.4.6 // indirect
 	darvaza.org/slog/handlers/zerolog v0.4.6 // indirect
 	github.com/BurntSushi/toml v1.3.2 // indirect

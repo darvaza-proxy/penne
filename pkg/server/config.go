@@ -29,7 +29,7 @@ type Config struct {
 	// ExchangeTimeout indicates the deadline to be used on DNS requests
 	ExchangeTimeout time.Duration `yaml:"exchange_timeout" default:"5s"`
 
-	Horizons  []horizon.Config  `yaml:"horizons,omitempty" toml:",omitempty" json:",omitempty"`
+	Horizons  []horizon.Config  `yaml:"horizons,omitempty"  toml:",omitempty" json:",omitempty"`
 	Resolvers []resolver.Config `yaml:"resolvers,omitempty" toml:",omitempty" json:",omitempty"`
 }
 

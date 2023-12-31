@@ -1,11 +1,11 @@
 darvaza.org/core v0.11.0 h1:upU8kY3f7g1T+4LWgtWh1m7fCsOTY1zqk6QjA6aUTK0=
 darvaza.org/core v0.11.0/go.mod h1:FO8+vzGWkDfpAePsmx9w8BSiJPGob17dWSsae/QNeIw=
-darvaza.org/darvaza/shared/config v0.2.5 h1:A4XYgKMkGgYuvxPDfPuoWSNHUXVSUGlBs2Lm8J3jhPE=
-darvaza.org/darvaza/shared/config v0.2.5/go.mod h1:yYxZLw5Be6pnfAn79IcVfUhqKpMzCxKYbqmUMjAebsU=
+darvaza.org/darvaza/shared/config v0.2.7 h1:f6hPakQCvGzDdGcT+nz4/V1XFH4myq2QxQ8Fxg1npWg=
+darvaza.org/darvaza/shared/config v0.2.7/go.mod h1:bVvD5vC4DsqFI3F8GPvAaVy2uudk137JLBp3j5RTbS0=
 darvaza.org/resolver v0.7.16 h1:Ily0ANxJrgyZmNRgQ6Y41SR5a+x5wyCjRyXYP23KYz4=
 darvaza.org/resolver v0.7.16/go.mod h1:DflsthRDOhDJbg76uzBn35k0/ozFpJzRnrNZ0Qjj9xI=
-darvaza.org/sidecar v0.2.1 h1:Bm+aWVtr1kOrVmLCRIafNV2fb5fi62hdE9jTCDY0oOg=
-darvaza.org/sidecar v0.2.1/go.mod h1:8MP5bMbfJ1Oak+cVK/wN/wH226LhYxhpnPDAuhbXiX8=
+darvaza.org/sidecar v0.2.2 h1:pyltWD1Ak4vO187RGWI7bSaOzJMp4olBVAEIruQwN7w=
+darvaza.org/sidecar v0.2.2/go.mod h1:8MP5bMbfJ1Oak+cVK/wN/wH226LhYxhpnPDAuhbXiX8=
 darvaza.org/sidecar/pkg/service v0.0.4 h1:L6FHIdAemdQMGGzOUekKvkuvVIhwe+qBMt+ZsB1l0IU=
 darvaza.org/sidecar/pkg/service v0.0.4/go.mod h1:ovR95RPbyZv+MS8B5vYjgRR+YxzIflfesmJW+35OR40=
 darvaza.org/slog v0.5.4 h1:xzlWVzYh4tuZLnj4A9tOHXfn/SAEIkApXPvK3YDiW9g=
@@ -46,7 +46,7 @@ github.com/go-playground/validator/v10 v10.16.0/go.mod h1:9iXMNT7sEkjXb0I+enO7QX
 github.com/gobwas/glob v0.2.3 h1:A4xDbljILXROh+kObIiy5kIaPYD8e96x1tgBhUI5J+Y=
 github.com/gobwas/glob v0.2.3/go.mod h1:d3Ez4x06l9bZtSvzIay5+Yzi0fmZzPgnTbPcKjJAkT8=
 github.com/godbus/dbus/v5 v5.0.4/go.mod h1:xhWf0FNVPg57R7Z0UbKHbJfkEywrmjJnf7w5xrFpKfA=
-github.com/google/go-cmp v0.5.9 h1:O2Tfq5qg4qc4AmwVlvv0oLiVAGB7enBSJ2x2DqQFi38=
+github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
 github.com/kardianos/service v1.2.2 h1:ZvePhAHfvo0A7Mftk/tEzqEZ7Q4lgnR8sGz4xu1YX60=
