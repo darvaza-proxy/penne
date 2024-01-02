@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/amery/defaults"
-
+	"darvaza.org/darvaza/shared/config"
+	"darvaza.org/sidecar/pkg/sidecar/store"
 	"darvaza.org/slog"
 	"darvaza.org/slog/handlers/discard"
 
@@ -18,9 +18,9 @@ type Config struct {
 	Context context.Context `yaml:"-" toml:"-" json:"-"`
 	Logger  slog.Logger     `yaml:"-" toml:"-" json:"-"`
 
-	Name    string `yaml:"name"    default:"localhost"`
-	Version string `yaml:"version" default:"unspecified"`
-	Authors string `yaml:"authors" default:"JPI Technologies <oss@jpi.io>"`
+	Name    string `default:"localhost"`
+	Version string `default:"unspecified"`
+	Authors string `default:"JPI Technologies <oss@jpi.io>"`
 
 	// DisableCHAOS makes the DNS server respond with an empty success instead of giving
 	// away software information.
@@ -29,8 +29,12 @@ type Config struct {
 	// ExchangeTimeout indicates the deadline to be used on DNS requests
 	ExchangeTimeout time.Duration `yaml:"exchange_timeout" default:"5s"`
 
-	Horizons  []horizon.Config  `yaml:"horizons,omitempty"  toml:",omitempty" json:",omitempty"`
-	Resolvers []resolver.Config `yaml:"resolvers,omitempty" toml:",omitempty" json:",omitempty"`
+	// TLS contains instructions to assemble the TLS store.
+	// TODO: allow ACME
+	TLS store.Config `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
+
+	Horizons  []horizon.Config  `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
+	Resolvers []resolver.Config `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
 }
 
 // SetDefaults fills gaps in the Config
@@ -52,5 +56,5 @@ func (cfg *Config) SetDefaults() error {
 	}
 
 	// and the rest
-	return defaults.Set(cfg)
+	return config.Set(cfg)
 }
