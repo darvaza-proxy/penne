@@ -2,9 +2,11 @@ package server
 
 import (
 	"context"
+	"net/netip"
 	"time"
 
 	"darvaza.org/darvaza/shared/config"
+	"darvaza.org/sidecar/pkg/sidecar"
 	"darvaza.org/sidecar/pkg/sidecar/store"
 	"darvaza.org/slog"
 	"darvaza.org/slog/handlers/discard"
@@ -29,12 +31,32 @@ type Config struct {
 	// ExchangeTimeout indicates the deadline to be used on DNS requests
 	ExchangeTimeout time.Duration `yaml:"exchange_timeout" default:"5s"`
 
+	// Supervision provides details for graceful upgrades and restarts
+	Supervision sidecar.SupervisionConfig `yaml:"supervision,omitempty" toml:",omitempty" json:",omitempty"`
+
+	// Listen provides details on the addresses and ports to handle
+	Listen ListenConfig `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
+
 	// TLS contains instructions to assemble the TLS store.
 	// TODO: allow ACME
 	TLS store.Config `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
 
 	Horizons  []horizon.Config  `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
 	Resolvers []resolver.Config `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
+}
+
+// ListenConfig describes the addresses and ports this [Server] will listen
+type ListenConfig struct {
+	Interfaces []string     `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
+	Addresses  []netip.Addr `yaml:",omitempty"  toml:",omitempty" json:",omitempty"`
+
+	DNS   uint16 `yaml:"dns_port"   default:"53"`
+	DoT   uint16 `yaml:"dot_port"   default:"853"`
+	HTTP  uint16 `yaml:"http_port"  default:"80"`
+	HTTPS uint16 `yaml:"https_port" default:"443"`
+
+	// DisableHTTP disables support for plain/unencrypted HTTP of the monitoring interface
+	DisableHTTP bool `yaml:"disable_http,omitempty" toml:",omitempty" json:",omitempty"`
 }
 
 // SetDefaults fills gaps in the Config

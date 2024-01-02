@@ -3,6 +3,7 @@ package server
 
 import (
 	"darvaza.org/darvaza/shared/storage"
+	"darvaza.org/sidecar/pkg/sidecar"
 	"darvaza.org/sidecar/pkg/sidecar/horizon"
 )
 
@@ -10,6 +11,8 @@ import (
 type Server struct {
 	cfg Config
 
+	// sidecar
+	sc *sidecar.Server
 	// TLS
 	tls storage.Store
 	// horizons
@@ -19,6 +22,7 @@ type Server struct {
 func (srv *Server) init() error {
 	for _, fn := range []func() error{
 		srv.initTLS,
+		srv.initSidecar,
 		srv.initResolvers,
 		srv.initHorizons,
 	} {
