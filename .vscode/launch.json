@@ -5,20 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "serve this",
+            "name": "penne serve",
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${fileDirname}",
+            "program": "cmd/penne",
             "args": [ "serve", "-vvv" ],
             "cwd": "${workspaceFolder}"
         },
         {
-            "name": "dump this",
+            "name": "penne dump",
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${fileDirname}",
+            "program": "cmd/penne",
             "args": [ "dump", "-F", "json", "-vvv" ],
             "cwd": "${workspaceFolder}"
         }
