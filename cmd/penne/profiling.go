@@ -7,6 +7,40 @@ import (
 	"darvaza.org/slog"
 )
 
+func memProfilingInit() {
+	flags := rootCmd.Flags()
+
+	mpf := flags.Lookup(memProfileFlag)
+	if mpf.Changed {
+		log := mustLogger(nil, flags)
+		memProfile := mpf.Value.String()
+
+		log.Info().
+			WithField("fileName", memProfile).
+			Print("memory profile enabled")
+
+		// Create profiling file
+		f, err := os.Create(memProfile)
+		if err != nil {
+			log.Error().
+				WithField(slog.ErrorFieldName, err).
+				WithField("fileName", memProfile).
+				Print("failed to create memory profile file")
+			return
+		}
+
+		// Schedule writing of memory profile
+		doOnFinalize(func() {
+			defer f.Close()
+			_ = pprof.WriteHeapProfile(f)
+
+			log.Info().
+				WithField("fileName", memProfile).
+				Print("memory profile stopped")
+		})
+	}
+}
+
 func cpuProfilingInit() {
 	flags := rootCmd.Flags()
 
@@ -25,7 +59,7 @@ func cpuProfilingInit() {
 			log.Error().
 				WithField(slog.ErrorFieldName, err).
 				WithField("fileName", cpuProfile).
-				Print("failed to create CPU profile fine")
+				Print("failed to create CPU profile file")
 			return
 		}
 
@@ -53,11 +87,16 @@ func cpuProfilingInit() {
 	}
 }
 
-const cpuProfileFlag = "cpu-profile"
+const (
+	cpuProfileFlag = "cpu-profile"
+	memProfileFlag = "mem-profile"
+)
 
 func init() {
 	pFlags := rootCmd.PersistentFlags()
 	pFlags.String(cpuProfileFlag, "", "write CPU profile to file")
+	pFlags.String(memProfileFlag, "", "write MEM profile to file")
 
 	doOnInit(cpuProfilingInit)
+	doOnInit(memProfilingInit)
 }
