@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"darvaza.org/darvaza/shared/config"
+	"darvaza.org/sidecar/pkg/sidecar"
 	"darvaza.org/sidecar/pkg/sidecar/store"
 	"darvaza.org/slog"
 	"darvaza.org/slog/handlers/discard"
@@ -28,6 +29,9 @@ type Config struct {
 
 	// ExchangeTimeout indicates the deadline to be used on DNS requests
 	ExchangeTimeout time.Duration `yaml:"exchange_timeout" default:"5s"`
+
+	// Supervision provides details for graceful upgrades and restarts
+	Supervision sidecar.SupervisionConfig `yaml:"supervision,omitempty" toml:",omitempty" json:",omitempty"`
 
 	// TLS contains instructions to assemble the TLS store.
 	// TODO: allow ACME

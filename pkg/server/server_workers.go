@@ -1,8 +1,10 @@
 package server
 
-import "darvaza.org/core"
-
 // Serve runs the service
-func (*Server) Serve() error {
-	return core.ErrNotImplemented
+func (srv *Server) Serve() error {
+	if err := srv.sc.Spawn(srv, srv.cfg.Supervision.HealthWait); err != nil {
+		return err
+	}
+
+	return srv.sc.Wait()
 }
