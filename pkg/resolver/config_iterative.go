@@ -50,6 +50,7 @@ func (rc Config) setupIterativeDebug(r *Resolver) {
 	// Info level for remote calls
 	r.debug[rc.Name+"-udp"] = slog.Info
 	r.debug[rc.Name+"-tcp"] = slog.Info
+	r.debug[rc.Name+"-tls"] = slog.Info
 	// Debug for those that could be cached
 	r.debug[rc.Name+"-mux"] = slog.Debug
 	r.debug[rc.Name] = slog.Debug

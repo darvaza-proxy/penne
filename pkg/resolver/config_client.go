@@ -9,7 +9,6 @@ import (
 
 func (rc Config) newClient(opts *Options) (client.Client, error) {
 	var c, udp, tcp client.Client
-	var err error
 
 	// UDP/TCP client mux
 	udp = opts.NewClient("udp")
@@ -19,14 +18,27 @@ func (rc Config) newClient(opts *Options) (client.Client, error) {
 		tcp, _ = reflect.NewWithClient(rc.Name+"-tcp", opts.Logger, tcp)
 	}
 
-	c, err = client.NewAutoClient(udp, tcp, 1*time.Second)
+	mux, err := client.NewAutoClient(udp, tcp, 1*time.Second)
 	if err != nil {
 		return nil, err
 	}
 
-	// TODO: add DNS over TLS support
+	// DNS over TLS
+	c = opts.NewClient("tcp+tls")
+	switch {
+	case c == nil:
+		// not TLS
+	case rc.Debug:
+		// reflect TLS
+		mux.TLS, _ = reflect.NewWithClient(rc.Name+"-tls", opts.Logger, c)
+	default:
+		// direct TLS
+		mux.TLS = c
+	}
+
 	// TODO: add DNS over HTTPS support
 
+	c = mux
 	if rc.DisableAAAA {
 		// remove AAAA entries
 		c = client.NewNoAAAA(c)
