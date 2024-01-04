@@ -2,27 +2,70 @@
 package horizon
 
 import (
+	"fmt"
+	"net/http"
 	"strings"
 
 	"darvaza.org/core"
 	"darvaza.org/resolver"
-)
-
-var (
-	_ resolver.Exchanger = (*Horizon)(nil)
+	"darvaza.org/sidecar/pkg/sidecar/horizon"
 )
 
 // MakeHorizons builds Horizons from a [Config] slice
 func MakeHorizons(conf []Config,
-	_ map[string]resolver.Exchanger) ([]string, map[string]*Horizon, error) {
+	res map[string]resolver.Exchanger) ([]string, map[string]*Horizon, error) {
 	//
-	names, _, err := makeHorizonsMap(conf)
+	names, m, err := makeHorizonsMap(conf)
 	if err != nil {
 		return nil, nil, err
 	}
 
 	out := make(map[string]*Horizon)
+	for len(m) > 0 {
+		err := makeHorizonsPass(out, m, res)
+		if err != nil {
+			return nil, nil, err
+		}
+	}
+
 	return names, out, nil
+}
+
+func makeHorizonsPass(out map[string]*Horizon, conf map[string]Config,
+	res map[string]resolver.Exchanger) error {
+	//
+	name, next, err := nextMakeHorizons(out, conf)
+	if err != nil {
+		// broken dependencies tree
+		return err
+	}
+
+	// take the chosen config and remove it from the map
+	hc, ok := conf[name]
+	if !ok {
+		core.Panic("unreachable")
+	}
+	delete(conf, name)
+
+	r, ok := getMakeHorizonsResolver(hc.Resolver, res)
+	if !ok {
+		// invalid resolver
+		return &Error{
+			Horizon: name,
+			Reason:  fmt.Sprintf("resolver %q not found", hc.Resolver),
+			Err:     core.ErrNotExists,
+		}
+	}
+
+	h, err := hc.New(next, r)
+	if err != nil {
+		// failed to build horizon
+		return err
+	}
+
+	// store
+	out[name] = h
+	return nil
 }
 
 func makeHorizonsMap(conf []Config) ([]string, map[string]Config, error) {
@@ -59,7 +102,67 @@ func makeHorizonsMap(conf []Config) ([]string, map[string]Config, error) {
 	return names, out, nil
 }
 
+func nextMakeHorizons(out map[string]*Horizon,
+	conf map[string]Config) (string, *Horizon, error) {
+	//
+	var err error
+
+	for name, hc := range conf {
+		// is the dependency is ready?
+		z, ok := getMakeHorizons(hc.Next, out)
+		if ok {
+			// ready
+			return name, z, nil
+		}
+
+		if err == nil {
+			// first unresolvable
+			err = &Error{
+				Horizon: name,
+				Reason:  fmt.Sprintf("horizon %q not found", hc.Next),
+				Err:     core.ErrNotExists,
+			}
+		}
+	}
+
+	// none ready
+	return "", nil, err
+}
+
+func getMakeHorizons(name string, out map[string]*Horizon) (*Horizon, bool) {
+	//
+	if name == "" {
+		// no dependencies
+		return nil, true
+	}
+
+	z, ok := out[name]
+	return z, ok
+}
+
+func getMakeHorizonsResolver(name string,
+	res map[string]resolver.Exchanger) (resolver.Exchanger, bool) {
+	//
+	if name == "" {
+		// no resolver needed
+		return nil, true
+	}
+
+	r, ok := res[name]
+	return r, ok
+}
+
 // A Horizon is a [resolver.Exchanger] for a particular set of networks
 type Horizon struct {
-	resolver.Exchanger
+	next *Horizon
+	res  resolver.Exchanger
+	zc   horizon.Config
+
+	nextH http.Handler
+	nextE resolver.Exchanger
+}
+
+// New creates an assembled [horizon.Horizon]
+func (z *Horizon) New(h http.Handler, e resolver.Exchanger) *horizon.Horizon {
+	return z.zc.New(h, e)
 }
