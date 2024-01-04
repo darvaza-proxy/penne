@@ -158,6 +158,8 @@ type Horizon struct {
 	res  resolver.Exchanger
 	zc   horizon.Config
 
+	allowForwarding bool
+
 	nextH http.Handler
 	nextE resolver.Exchanger
 }

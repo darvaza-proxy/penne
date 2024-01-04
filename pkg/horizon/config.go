@@ -25,6 +25,8 @@ func (hc Config) New(next *Horizon, res resolver.Exchanger) (*Horizon, error) {
 	z := &Horizon{
 		next: next,
 		res:  res,
+
+		allowForwarding: hc.AllowForwarding,
 	}
 
 	z.zc = horizon.Config{
