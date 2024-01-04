@@ -44,7 +44,11 @@ func (z *Horizon) HorizonExchange(ctx context.Context, req *dns.Msg) (*dns.Msg, 
 		// remove EDNS0 SUBNET data
 		altered := removeEDNS0SUBNET(req2)
 
-		// TODO: inject new EDNS0 SUBNET based on the horizon.Match
+		if o, ok := z.newEDNS0SUBNET(ctx); ok {
+			// add EDNS0 SUBNET data based on the horizon.Match
+			req2.Extra = append(req2.Extra, o)
+			altered = true
+		}
 
 		if altered {
 			// new request
@@ -65,6 +69,38 @@ func (z *Horizon) HorizonExchange(ctx context.Context, req *dns.Msg) (*dns.Msg, 
 		// request unaltered
 		return resp, nil
 	}
+}
+
+func (z *Horizon) newEDNS0SUBNET(ctx context.Context) (dns.RR, bool) {
+	m, ok := z.ctxKey.Get(ctx)
+	if !ok {
+		// no horizon.Match data
+		return nil, false
+	}
+
+	bits := m.CIDR.Bits()
+	if bits == 0 {
+		// don't add entry for /0
+		return nil, false
+	}
+
+	addr := m.CIDR.Addr()
+	family := core.IIf(addr.Is6(), 2, 1)
+
+	// EDNS0 SUBNET
+	e := new(dns.EDNS0_SUBNET)
+	e.Code = dns.EDNS0SUBNET
+	e.Family = uint16(family)
+	e.SourceNetmask = uint8(bits)
+	e.Address = addr.AsSlice()
+
+	// OPT
+	o := new(dns.OPT)
+	o.Hdr.Name = "."
+	o.Hdr.Rrtype = dns.TypeOPT
+	o.Option = append(o.Option, e)
+
+	return o, true
 }
 
 func removeEDNS0SUBNET(req *dns.Msg) bool {

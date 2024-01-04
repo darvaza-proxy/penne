@@ -20,12 +20,13 @@ func defaultHorizons() []horizon.Config {
 
 func (srv *Server) initHorizons() error {
 	// prepare srv.z
-	srv.z.ContextKey = horizon.NewContextKey("penne.horizon.match")
+	ctxKey := horizon.NewContextKey("penne.horizon.match")
+	srv.z.ContextKey = ctxKey
 	srv.z.ExchangeTimeout = srv.cfg.ExchangeTimeout
 	srv.z.ExchangeContext = reflect.WithEnabledFunc(srv.cfg.Context, srv.reflectEnabled)
 
 	// build horizons
-	names, m, err := horizon.MakeHorizons(srv.cfg.Horizons, srv.res)
+	names, m, err := horizon.MakeHorizons(srv.cfg.Horizons, srv.res, ctxKey)
 	if err != nil {
 		return err
 	}
