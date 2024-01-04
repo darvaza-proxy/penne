@@ -42,6 +42,10 @@ func prepareConfig(ctx context.Context, flags *pflag.FlagSet) (*server.Config, e
 		return nil, err
 	}
 
+	if s := confLoader.Last(); s != "" {
+		log.Info().WithField("filename", s).Print("config loaded")
+	}
+
 	return cfg, nil
 }
 
