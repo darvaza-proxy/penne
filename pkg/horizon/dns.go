@@ -7,6 +7,7 @@ import (
 
 	"darvaza.org/core"
 	"darvaza.org/resolver"
+	"darvaza.org/resolver/pkg/exdns"
 )
 
 var _ resolver.Exchanger = (*Horizon)(nil)
@@ -38,8 +39,19 @@ func (z *Horizon) Exchange(ctx context.Context, req *dns.Msg) (*dns.Msg, error) 
 func (z *Horizon) HorizonExchange(ctx context.Context, req *dns.Msg) (*dns.Msg, error) {
 	var original = req
 
-	if !z.allowForwarding {
+	switch {
+	case !z.allowForwarding:
 		if req2, ok := z.replaceEDNS0SUBNET(ctx, req); ok {
+			req = req2
+		}
+	case !containsEDNS0SUBNET(req):
+		// add EDNS0 SUBNET data based on the horizon.Match
+		// if none is included already
+		if o, ok := z.newEDNS0SUBNET(ctx); ok {
+			// add EDNS0 SUBNET data based on the horizon.Match
+			req2 := req.Copy()
+			req2.Id = dns.Id()
+			req2.Extra = append(req2.Extra, o)
 			req = req2
 		}
 	}
@@ -109,6 +121,20 @@ func (z *Horizon) newEDNS0SUBNET(ctx context.Context) (dns.RR, bool) {
 	o.Option = append(o.Option, e)
 
 	return o, true
+}
+
+func containsEDNS0SUBNET(req *dns.Msg) bool {
+	var found bool
+
+	exdns.ForEachRR(req.Extra, func(opts *dns.OPT) {
+		for _, opt := range opts.Option {
+			if opt.Option() == dns.EDNS0SUBNET {
+				found = true
+			}
+		}
+	})
+
+	return found
 }
 
 func removeEDNS0SUBNET(req *dns.Msg) bool {
