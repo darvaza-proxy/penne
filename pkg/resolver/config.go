@@ -15,6 +15,10 @@ type Config struct {
 	// Debug indicates the requests passing through this [Resolver] should be logged or not.
 	Debug bool `yaml:"debug,omitempty"        toml:",omitempty" json:",omitempty"`
 
+	// OmitSubNet indicates requests reaching out to remote servers should omit
+	// EDNS0 SUBNET information.
+	OmitSubNet bool `yaml:"omit_subnet,omitempty" toml:",omitempty" json:",omitempty"`
+
 	DisableAAAA bool     `yaml:"disable_aaaa,omitempty" toml:",omitempty" json:",omitempty"`
 	Iterative   bool     `yaml:"iterative,omitempty"    toml:",omitempty" json:",omitempty"`
 	Recursive   bool     `yaml:"recursive,omitempty"    toml:",omitempty" json:",omitempty"`

@@ -36,6 +36,10 @@ func (rc Config) setupIterative(r *Resolver, opts *Options) error {
 
 	// TODO: add cache
 
+	if rc.OmitSubNet {
+		e = newOmitEDNS0SubNetExchanger(e)
+	}
+
 	if rc.Debug {
 		e, _ = reflect.NewWithExchanger(rc.Name, opts.Logger, e)
 
