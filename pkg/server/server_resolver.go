@@ -26,13 +26,27 @@ func defaultResolvers() []resolver.Config {
 }
 
 func (srv *Server) initResolvers() error {
-	_, _, err := resolver.MakeResolvers(srv.cfg.Resolvers, srv.cfg.Logger)
-	return err
+	// prepare resolver debug map
+	srv.rd = make(map[string]slog.LogLevel)
+
+	// build resolvers
+	opts := &resolver.Options{
+		Logger: srv.cfg.Logger,
+	}
+
+	_, res, err := resolver.MakeResolvers(srv.cfg.Resolvers, srv.rd, opts)
+	if err != nil {
+		return err
+	}
+
+	// store
+	srv.res = res
+	return nil
 }
 
-func (*Server) reflectEnabled(_ context.Context, _ string) (slog.LogLevel, bool) {
-	// TODO: make this configurable
-	return slog.Debug, true
+func (srv *Server) reflectEnabled(_ context.Context, name string) (slog.LogLevel, bool) {
+	level, ok := srv.rd[name]
+	return level, ok
 }
 
 // ServeDNS handles dns requests based on the IP address of the client

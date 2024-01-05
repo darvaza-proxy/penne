@@ -3,8 +3,10 @@ package server
 
 import (
 	"darvaza.org/darvaza/shared/storage"
+	"darvaza.org/resolver"
 	"darvaza.org/sidecar/pkg/sidecar"
 	"darvaza.org/sidecar/pkg/sidecar/horizon"
+	"darvaza.org/slog"
 )
 
 // Server is a Penne server
@@ -17,6 +19,9 @@ type Server struct {
 	tls storage.Store
 	// horizons
 	z horizon.Horizons
+	// resolvers
+	res map[string]resolver.Exchanger
+	rd  map[string]slog.LogLevel
 }
 
 func (srv *Server) init() error {

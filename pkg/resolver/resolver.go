@@ -2,6 +2,7 @@
 package resolver
 
 import (
+	"fmt"
 	"strings"
 
 	"darvaza.org/core"
@@ -13,17 +14,58 @@ var (
 	_ resolver.Exchanger = (*Resolver)(nil)
 )
 
-// MakeResolvers builds resolvers from a [Config] slice
-func MakeResolvers(conf []Config,
-	_ slog.Logger) ([]string, map[string]resolver.Exchanger, error) {
+// MakeResolvers builds resolvers from a [Config] slice.
+func MakeResolvers(conf []Config, debug map[string]slog.LogLevel,
+	opts *Options) ([]string, map[string]resolver.Exchanger, error) {
 	//
-	names, _, err := makeResolversMap(conf)
+	if conf == nil {
+		return nil, nil, core.ErrInvalid
+	}
+
+	names, m, err := makeResolversMap(conf)
 	if err != nil {
 		return nil, nil, err
 	}
 
 	res := make(map[string]resolver.Exchanger)
+	for len(m) > 0 {
+		err := makeResolversPass(res, m, opts)
+		if err != nil {
+			return nil, nil, err
+		}
+	}
+
+	if debug != nil {
+		makeResolverSetDebug(res, debug)
+	}
 	return names, res, nil
+}
+
+func makeResolversPass(res map[string]resolver.Exchanger,
+	conf map[string]Config, opt *Options) error {
+	//
+	name, next, err := nextMakeResolvers(res, conf)
+	if err != nil {
+		// broken dependencies tree
+		return err
+	}
+
+	// take the chosen config and remove it from the map
+	rc, ok := conf[name]
+	if !ok {
+		core.Panic("unreachable")
+	}
+	delete(conf, name)
+
+	r, err := rc.New(next, opt)
+	if err != nil {
+		// failed to build resolver
+		return err
+	}
+
+	// store
+	res[name] = r
+	return nil
 }
 
 func makeResolversMap(conf []Config) ([]string, map[string]Config, error) {
@@ -59,7 +101,82 @@ func makeResolversMap(conf []Config) ([]string, map[string]Config, error) {
 	return names, out, nil
 }
 
-// Resolver is a custom [resolver.Exchanger]
+func makeResolverSetDebug(res map[string]resolver.Exchanger,
+	debug map[string]slog.LogLevel) {
+	//
+	for _, e := range res {
+		if r, ok := e.(*Resolver); ok {
+			r.copyDebugMap(debug)
+		}
+	}
+}
+
+func nextMakeResolvers(res map[string]resolver.Exchanger,
+	conf map[string]Config) (string, resolver.Exchanger, error) {
+	//
+	var err error
+
+	for name, rc := range conf {
+		// is the dependency ready?
+		r, ok := getMakeResolvers(rc.Next, res)
+		if ok {
+			// ready
+			return name, r, nil
+		}
+
+		if err == nil {
+			// first unresolvable
+			err = &Error{
+				Resolver: name,
+				Reason:   fmt.Sprintf("resolver %q not available", rc.Next),
+				Err:      core.ErrNotExists,
+			}
+		}
+	}
+
+	// none ready
+	return "", nil, err
+}
+
+func getMakeResolvers(name string,
+	res map[string]resolver.Exchanger) (resolver.Exchanger, bool) {
+	//
+	if name == "" {
+		// no dependencies
+		return nil, true
+	}
+
+	r, ok := res[name]
+	return r, ok
+}
+
+// Resolver is a custom [resolver.Exchanger].
 type Resolver struct {
 	resolver.Exchanger
+
+	debug    map[string]slog.LogLevel
+	log      slog.Logger
+	name     string
+	suffixes []string
+
+	Next resolver.Exchanger
+}
+
+// Name returns the name of the resolver.
+func (r *Resolver) Name() string {
+	return r.name
+}
+
+func (r *Resolver) String() string {
+	return fmt.Sprintf("resolver[%q]", r.name)
+}
+
+func (r *Resolver) copyDebugMap(debug map[string]slog.LogLevel) bool {
+	if len(r.debug) > 0 {
+		for k, v := range r.debug {
+			debug[k] = v
+		}
+		return true
+	}
+	return false
 }
