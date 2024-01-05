@@ -57,17 +57,7 @@ func (z *Horizon) HorizonExchange(ctx context.Context, req *dns.Msg) (*dns.Msg, 
 	}
 
 	resp, err := z.Exchange(ctx, req)
-	switch {
-	case err != nil:
-		return nil, err
-	case req != original:
-		// restore ID
-		resp.Id = original.Id
-		return resp, nil
-	default:
-		// request unaltered
-		return resp, nil
-	}
+	return exdns.RestoreReturn(original, resp, err)
 }
 
 func (z *Horizon) replaceEDNS0SUBNET(ctx context.Context, req *dns.Msg) (*dns.Msg, bool) {
