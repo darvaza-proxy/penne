@@ -25,7 +25,7 @@ func (srv *Server) initHorizons() error {
 	srv.z.ExchangeContext = reflect.WithEnabledFunc(srv.cfg.Context, srv.reflectEnabled)
 
 	// build horizons
-	names, m, err := horizon.MakeHorizons(srv.cfg.Horizons, nil)
+	names, m, err := horizon.MakeHorizons(srv.cfg.Horizons, srv.res)
 	if err != nil {
 		return err
 	}
