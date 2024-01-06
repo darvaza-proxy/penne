@@ -13,7 +13,8 @@ import (
 
 // MakeHorizons builds Horizons from a [Config] slice
 func MakeHorizons(conf []Config,
-	res map[string]resolver.Exchanger) ([]string, map[string]*Horizon, error) {
+	res map[string]resolver.Exchanger,
+	ctxKey *core.ContextKey[horizon.Match]) ([]string, map[string]*Horizon, error) {
 	//
 	names, m, err := makeHorizonsMap(conf)
 	if err != nil {
@@ -22,7 +23,7 @@ func MakeHorizons(conf []Config,
 
 	out := make(map[string]*Horizon)
 	for len(m) > 0 {
-		err := makeHorizonsPass(out, m, res)
+		err := makeHorizonsPass(out, m, res, ctxKey)
 		if err != nil {
 			return nil, nil, err
 		}
@@ -32,7 +33,7 @@ func MakeHorizons(conf []Config,
 }
 
 func makeHorizonsPass(out map[string]*Horizon, conf map[string]Config,
-	res map[string]resolver.Exchanger) error {
+	res map[string]resolver.Exchanger, ctxKey *core.ContextKey[horizon.Match]) error {
 	//
 	name, next, err := nextMakeHorizons(out, conf)
 	if err != nil {
@@ -57,7 +58,7 @@ func makeHorizonsPass(out map[string]*Horizon, conf map[string]Config,
 		}
 	}
 
-	h, err := hc.New(next, r)
+	h, err := hc.New(next, r, ctxKey)
 	if err != nil {
 		// failed to build horizon
 		return err
@@ -154,9 +155,12 @@ func getMakeHorizonsResolver(name string,
 
 // A Horizon is a [resolver.Exchanger] for a particular set of networks
 type Horizon struct {
-	next *Horizon
-	res  resolver.Exchanger
-	zc   horizon.Config
+	next   *Horizon
+	ctxKey *core.ContextKey[horizon.Match]
+	res    resolver.Exchanger
+	zc     horizon.Config
+
+	allowForwarding bool
 
 	nextH http.Handler
 	nextE resolver.Exchanger

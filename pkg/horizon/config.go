@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"net/netip"
 
+	"darvaza.org/core"
 	"darvaza.org/resolver"
 	"darvaza.org/sidecar/pkg/sidecar/horizon"
 )
@@ -20,11 +21,15 @@ type Config struct {
 }
 
 // New creates a new [Horizon] from the [Config]
-func (hc Config) New(next *Horizon, res resolver.Exchanger) (*Horizon, error) {
+func (hc Config) New(next *Horizon, res resolver.Exchanger,
+	ctxKey *core.ContextKey[horizon.Match]) (*Horizon, error) {
 	//
 	z := &Horizon{
 		next: next,
 		res:  res,
+
+		ctxKey:          ctxKey,
+		allowForwarding: hc.AllowForwarding,
 	}
 
 	z.zc = horizon.Config{

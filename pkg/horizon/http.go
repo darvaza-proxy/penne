@@ -6,6 +6,13 @@ import (
 
 var _ http.Handler = (*Horizon)(nil)
 
+var forwardHTTPHeaders = []string{
+	"Forwarded", // rfc7239
+	"X-Forwarded-For",
+	"X-Forwarded-Host",
+	"X-Forwarded-Proto",
+}
+
 // ServeHTTP handles HTTP requests passed from another [Horizon].
 func (z *Horizon) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	var next http.Handler
@@ -28,6 +35,12 @@ func (z *Horizon) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 // A Horizon that acts as entry point has to make sure security constraints
 // are checked.
 func (z *Horizon) HorizonServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	// TODO: remove X-Forwarded-* headers if forwarding isn't allowed
+	if !z.allowForwarding {
+		hdr := rw.Header()
+		for _, h := range forwardHTTPHeaders {
+			hdr.Del(h)
+		}
+	}
+
 	z.ServeHTTP(rw, req)
 }
