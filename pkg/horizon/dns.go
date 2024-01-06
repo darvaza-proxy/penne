@@ -39,20 +39,7 @@ func (z *Horizon) HorizonExchange(ctx context.Context, req *dns.Msg) (*dns.Msg, 
 	var original = req
 
 	if !z.allowForwarding {
-		req2 := req.Copy()
-
-		// remove EDNS0 SUBNET data
-		altered := removeEDNS0SUBNET(req2)
-
-		if o, ok := z.newEDNS0SUBNET(ctx); ok {
-			// add EDNS0 SUBNET data based on the horizon.Match
-			req2.Extra = append(req2.Extra, o)
-			altered = true
-		}
-
-		if altered {
-			// new request
-			req2.Id = dns.Id()
+		if req2, ok := z.replaceEDNS0SUBNET(ctx, req); ok {
 			req = req2
 		}
 	}
@@ -69,6 +56,27 @@ func (z *Horizon) HorizonExchange(ctx context.Context, req *dns.Msg) (*dns.Msg, 
 		// request unaltered
 		return resp, nil
 	}
+}
+
+func (z *Horizon) replaceEDNS0SUBNET(ctx context.Context, req *dns.Msg) (*dns.Msg, bool) {
+	req2 := req.Copy()
+
+	// remove EDNS0 SUBNET data
+	altered := removeEDNS0SUBNET(req2)
+
+	if o, ok := z.newEDNS0SUBNET(ctx); ok {
+		// add EDNS0 SUBNET data based on the horizon.Match
+		req2.Extra = append(req2.Extra, o)
+		altered = true
+	}
+
+	if altered {
+		// new request
+		req2.Id = dns.Id()
+		return req2, true
+	}
+
+	return nil, false
 }
 
 func (z *Horizon) newEDNS0SUBNET(ctx context.Context) (dns.RR, bool) {
