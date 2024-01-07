@@ -2,20 +2,18 @@ package resolver
 
 import (
 	"darvaza.org/resolver"
+	"darvaza.org/resolver/pkg/client"
 	"darvaza.org/resolver/pkg/reflect"
 	"darvaza.org/slog"
 )
 
+const (
+	// DefaultIteratorMaxRR indicates the number of records
+	// the Iterator lookuper will cache.
+	DefaultIteratorMaxRR = 1024
+)
+
 func (rc Config) setupIterative(r *Resolver, opts *Options) error {
-	var e resolver.Exchanger
-
-	if rc.Recursive || len(rc.Servers) > 0 {
-		return &Error{
-			Resolver: rc.Name,
-			Reason:   "iterative resolver with specific servers or recursive not supported.",
-		}
-	}
-
 	c, err := rc.newClient(opts)
 	if err != nil {
 		return &Error{
@@ -25,7 +23,7 @@ func (rc Config) setupIterative(r *Resolver, opts *Options) error {
 		}
 	}
 
-	e, err = resolver.NewRootLookuperWithClient("", c)
+	e, err := rc.newIteratorLookuper(c, opts)
 	if err != nil {
 		return &Error{
 			Resolver: rc.Name,
@@ -48,6 +46,25 @@ func (rc Config) setupIterative(r *Resolver, opts *Options) error {
 
 	r.Exchanger = e
 	return nil
+}
+
+func (rc Config) newIteratorLookuper(c client.Client, opts *Options) (resolver.Exchanger, error) {
+	var err error
+	il := resolver.NewIteratorLookuper(rc.Name, rc.IterativeMaxRR, c)
+	il.SetLogger(opts.Logger)
+
+	if len(rc.Servers) == 0 {
+		err = il.AddRootServers()
+	} else {
+		// use rc.Suffixes to narrow iteration to specific domains.
+		err = il.AddServer(".", 0, rc.Servers...)
+		_ = il.SetPersistent(".")
+	}
+
+	if err != nil {
+		return nil, err
+	}
+	return il, nil
 }
 
 func (rc Config) setupIterativeDebug(r *Resolver) {
