@@ -26,6 +26,7 @@ require (
 )
 
 require (
+	darvaza.org/cache/x/simplelru v0.1.4 // indirect
 	darvaza.org/darvaza/shared/web v0.3.11 // indirect
 	darvaza.org/middleware v0.2.6 // indirect
 	darvaza.org/slog/handlers/filter v0.4.7 // indirect

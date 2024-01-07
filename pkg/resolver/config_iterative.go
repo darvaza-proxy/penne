@@ -6,8 +6,16 @@ import (
 	"darvaza.org/slog"
 )
 
+const (
+	// DefaultIteratorCacheSize indicates the number of records
+	// the Iterator lookuper will cache.
+	DefaultIteratorCacheSize = 1024
+)
+
 func (rc Config) setupIterative(r *Resolver, opts *Options) error {
 	var e resolver.Exchanger
+
+	// TODO: give rc.Servers to the IteratorLookuper
 
 	if rc.Recursive || len(rc.Servers) > 0 {
 		return &Error{
@@ -25,16 +33,16 @@ func (rc Config) setupIterative(r *Resolver, opts *Options) error {
 		}
 	}
 
-	e, err = resolver.NewRootLookuperWithClient("", c)
-	if err != nil {
+	il := resolver.NewIteratorLookuper(rc.Name, DefaultIteratorCacheSize, c)
+	il.SetLogger(opts.Logger)
+	if err := il.AddRootServers(); err != nil {
 		return &Error{
 			Resolver: rc.Name,
 			Reason:   "failed to create iterative lookuper",
 			Err:      err,
 		}
 	}
-
-	// TODO: add cache
+	e = il
 
 	if rc.OmitSubNet {
 		e = newOmitEDNS0SubNetExchanger(e)
