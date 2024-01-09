@@ -25,6 +25,12 @@ func (cfg *Config) export(s storage.Store) (*sidecar.Config, error) {
 			PortInsecure:   cfg.Listen.HTTP,
 			EnableInsecure: !cfg.Listen.DisableHTTP,
 		},
+
+		DNS: sidecar.DNSConfig{
+			Enabled: true,
+			Port:    cfg.Listen.DNS,
+			TLSPort: cfg.Listen.DoT,
+		},
 	}
 
 	if err := scc.SetDefaults(); err != nil {

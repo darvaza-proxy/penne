@@ -6,8 +6,8 @@ require (
 	darvaza.org/core v0.11.2
 	darvaza.org/darvaza/shared v0.5.11
 	darvaza.org/darvaza/shared/config v0.2.7
-	darvaza.org/resolver v0.7.19
-	darvaza.org/sidecar v0.3.2
+	darvaza.org/resolver v0.7.22
+	darvaza.org/sidecar v0.3.3
 	darvaza.org/sidecar/pkg/service v0.0.4
 	darvaza.org/slog v0.5.5
 	darvaza.org/slog/handlers/discard v0.4.7
@@ -21,8 +21,6 @@ require (
 )
 
 require (
-	darvaza.org/darvaza/acme v0.1.7 // indirect
-	darvaza.org/darvaza/agent v0.2.10 // indirect
 	darvaza.org/darvaza/shared/web v0.3.11 // indirect
 	darvaza.org/middleware v0.2.6 // indirect
 	darvaza.org/slog/handlers/filter v0.4.7 // indirect
