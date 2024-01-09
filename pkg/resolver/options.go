@@ -2,6 +2,7 @@ package resolver
 
 import (
 	"crypto/tls"
+	"time"
 
 	"github.com/miekg/dns"
 
@@ -13,6 +14,8 @@ import (
 // Options contains information used to assemble all [Resolver]s.
 type Options struct {
 	Logger slog.Logger
+
+	SingleFlight time.Duration `default:"1s"`
 
 	TLSConfig *tls.Config
 }
