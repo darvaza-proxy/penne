@@ -44,7 +44,13 @@ func (rc Config) newClient(opts *Options) (client.Client, error) {
 		c = client.NewNoAAAA(c)
 	}
 
+	if opts.SingleFlight >= 0 {
+		// stampede control
+		c = client.NewSingleFlight(c, opts.SingleFlight)
+	}
+
 	if rc.Debug {
+		// logging
 		c, _ = reflect.NewWithClient(rc.Name+"-mux", opts.Logger, c)
 	}
 
