@@ -3,28 +3,29 @@ module darvaza.org/penne
 go 1.20
 
 require (
-	darvaza.org/core v0.11.2
-	darvaza.org/darvaza/shared v0.5.11
-	darvaza.org/darvaza/shared/config v0.2.7
-	darvaza.org/resolver v0.7.22
-	darvaza.org/sidecar v0.3.4
-	darvaza.org/sidecar/pkg/service v0.0.5
-	darvaza.org/slog v0.5.5
-	darvaza.org/slog/handlers/discard v0.4.8
+	darvaza.org/core v0.11.4
+	darvaza.org/darvaza/shared v0.5.12
+	darvaza.org/darvaza/shared/config v0.2.8
+	darvaza.org/resolver v0.8.0
+	darvaza.org/sidecar v0.3.5
+	darvaza.org/sidecar/pkg/service v0.0.6
+	darvaza.org/slog v0.5.6
+	darvaza.org/slog/handlers/discard v0.4.9
 )
 
 require (
-	github.com/mgechev/revive v1.3.4
+	github.com/mgechev/revive v1.3.6
 	github.com/miekg/dns v1.1.57
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/pflag v1.0.5
 )
 
 require (
-	darvaza.org/darvaza/shared/web v0.3.11 // indirect
-	darvaza.org/middleware v0.2.6 // indirect
-	darvaza.org/slog/handlers/filter v0.4.7 // indirect
-	darvaza.org/slog/handlers/zerolog v0.4.7 // indirect
+	darvaza.org/cache/x/simplelru v0.1.7 // indirect
+	darvaza.org/darvaza/shared/web v0.3.12 // indirect
+	darvaza.org/middleware v0.2.7 // indirect
+	darvaza.org/slog/handlers/filter v0.4.8 // indirect
+	darvaza.org/slog/handlers/zerolog v0.4.8 // indirect
 	github.com/BurntSushi/toml v1.3.2 // indirect
 	github.com/amery/defaults v0.1.0 // indirect
 	github.com/chavacava/garif v0.1.0 // indirect
@@ -57,10 +58,11 @@ require (
 	github.com/quic-go/quic-go v0.40.1 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/rs/zerolog v1.31.0 // indirect
+	github.com/spf13/afero v1.11.0 // indirect
 	github.com/zeebo/blake3 v0.2.3 // indirect
 	go.uber.org/mock v0.4.0 // indirect
 	golang.org/x/crypto v0.18.0 // indirect
-	golang.org/x/exp v0.0.0-20240103183307-be819d1f06fc // indirect
+	golang.org/x/exp v0.0.0-20240110193028-0dcbfd608b1e // indirect
 	golang.org/x/mod v0.14.0 // indirect
 	golang.org/x/net v0.20.0 // indirect
 	golang.org/x/sync v0.6.0 // indirect
