@@ -11,10 +11,12 @@ import (
 	"darvaza.org/core"
 	"darvaza.org/resolver"
 	"darvaza.org/resolver/pkg/errors"
+	"darvaza.org/resolver/pkg/exdns"
 	"darvaza.org/slog"
 )
 
 var (
+	_ resolver.Lookuper  = (*Resolver)(nil)
 	_ resolver.Exchanger = (*Resolver)(nil)
 )
 
@@ -173,6 +175,12 @@ func (r *Resolver) copyDebugMap(debug map[string]slog.LogLevel) bool {
 		return true
 	}
 	return false
+}
+
+// Lookup implements the [resolver.Lookuper] interface.
+func (r *Resolver) Lookup(ctx context.Context, qName string, qType uint16) (*dns.Msg, error) {
+	req := exdns.NewRequestFromParts(qName, dns.ClassINET, qType)
+	return r.Exchange(ctx, req)
 }
 
 // Exchange implements the [resolver.Exchanger] interface.
