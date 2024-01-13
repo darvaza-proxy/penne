@@ -13,6 +13,8 @@ import (
 	"darvaza.org/resolver/pkg/errors"
 	"darvaza.org/resolver/pkg/exdns"
 	"darvaza.org/slog"
+
+	"darvaza.org/penne/pkg/suffix"
 )
 
 var (
@@ -149,7 +151,7 @@ type Resolver struct {
 	debug    map[string]slog.LogLevel
 	log      slog.Logger
 	name     string
-	suffixes []string
+	suffixes suffix.Suffixes
 	e        resolver.Exchanger
 	next     resolver.Exchanger
 }
