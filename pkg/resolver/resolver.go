@@ -195,6 +195,17 @@ func (r *Resolver) Exchange(ctx context.Context, req *dns.Msg) (*dns.Msg, error)
 	return e.Exchange(ctx, req)
 }
 
+// SetFallback sets the exchanger to use next if it doesn't have
+// one already set from [Config].
+func (r *Resolver) SetFallback(last resolver.Exchanger) bool {
+	if r.next == nil && last != nil {
+		r.next = last
+		return true
+	}
+
+	return false
+}
+
 func forbiddenExchange(_ context.Context, req *dns.Msg) (*dns.Msg, error) {
 	resp := new(dns.Msg)
 	resp.SetRcode(req, dns.RcodeRefused)
