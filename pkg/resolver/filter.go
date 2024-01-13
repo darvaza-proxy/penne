@@ -3,10 +3,11 @@ package resolver
 import (
 	"context"
 
+	"github.com/miekg/dns"
+
 	"darvaza.org/core"
 	"darvaza.org/resolver"
 	"darvaza.org/resolver/pkg/exdns"
-	"github.com/miekg/dns"
 )
 
 func newOmitEDNS0SubNetExchanger(next resolver.Exchanger) resolver.Exchanger {

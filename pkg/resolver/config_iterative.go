@@ -36,7 +36,7 @@ func (rc Config) setupIterative(r *Resolver, opts *Options) error {
 		rc.setupIterativeDebug(r)
 	}
 
-	r.Exchanger = e
+	r.e = e
 	return nil
 }
 

@@ -2,11 +2,15 @@
 package resolver
 
 import (
+	"context"
 	"fmt"
 	"strings"
 
+	"github.com/miekg/dns"
+
 	"darvaza.org/core"
 	"darvaza.org/resolver"
+	"darvaza.org/resolver/pkg/errors"
 	"darvaza.org/slog"
 )
 
@@ -144,14 +148,12 @@ func getMakeResolvers(name string,
 
 // Resolver is a custom [resolver.Exchanger].
 type Resolver struct {
-	resolver.Exchanger
-
 	debug    map[string]slog.LogLevel
 	log      slog.Logger
 	name     string
 	suffixes []string
-
-	Next resolver.Exchanger
+	e        resolver.Exchanger
+	next     resolver.Exchanger
 }
 
 // Name returns the name of the resolver.
@@ -172,3 +174,33 @@ func (r *Resolver) copyDebugMap(debug map[string]slog.LogLevel) bool {
 	}
 	return false
 }
+
+// Exchange implements the [resolver.Exchanger] interface.
+func (r *Resolver) Exchange(ctx context.Context, req *dns.Msg) (*dns.Msg, error) {
+	var e resolver.Exchanger
+
+	if ctx == nil || req == nil || len(req.Question) != 1 {
+		return nil, errors.ErrBadRequest()
+	}
+
+	switch {
+	case r.e != nil:
+		e = r.e
+	case r.next != nil:
+		e = r.next
+	default:
+		e = forbiddenExchanger
+	}
+
+	return e.Exchange(ctx, req)
+}
+
+func forbiddenExchange(_ context.Context, req *dns.Msg) (*dns.Msg, error) {
+	resp := new(dns.Msg)
+	resp.SetRcode(req, dns.RcodeRefused)
+	resp.Compress = false
+	resp.RecursionAvailable = true
+	return resp, nil
+}
+
+var forbiddenExchanger = resolver.ExchangerFunc(forbiddenExchange)
