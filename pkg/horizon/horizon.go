@@ -7,13 +7,14 @@ import (
 	"strings"
 
 	"darvaza.org/core"
-	"darvaza.org/resolver"
 	"darvaza.org/sidecar/pkg/sidecar/horizon"
+
+	"darvaza.org/penne/pkg/resolver"
 )
 
 // MakeHorizons builds Horizons from a [Config] slice
 func MakeHorizons(conf []Config,
-	res map[string]resolver.Exchanger,
+	res map[string]*resolver.Resolver,
 	ctxKey *core.ContextKey[horizon.Match]) ([]string, map[string]*Horizon, error) {
 	//
 	names, m, err := makeHorizonsMap(conf)
@@ -33,7 +34,7 @@ func MakeHorizons(conf []Config,
 }
 
 func makeHorizonsPass(out map[string]*Horizon, conf map[string]Config,
-	res map[string]resolver.Exchanger, ctxKey *core.ContextKey[horizon.Match]) error {
+	res map[string]*resolver.Resolver, ctxKey *core.ContextKey[horizon.Match]) error {
 	//
 	name, next, err := nextMakeHorizons(out, conf)
 	if err != nil {
@@ -141,8 +142,7 @@ func getMakeHorizons(name string, out map[string]*Horizon) (*Horizon, bool) {
 	return z, ok
 }
 
-func getMakeHorizonsResolver(name string,
-	res map[string]resolver.Exchanger) (resolver.Exchanger, bool) {
+func getMakeHorizonsResolver(name string, res map[string]*resolver.Resolver) (*resolver.Resolver, bool) {
 	//
 	if name == "" {
 		// no resolver needed
@@ -157,7 +157,7 @@ func getMakeHorizonsResolver(name string,
 type Horizon struct {
 	next   *Horizon
 	ctxKey *core.ContextKey[horizon.Match]
-	res    resolver.Exchanger
+	res    *resolver.Resolver
 	zc     horizon.Config
 
 	allowForwarding bool

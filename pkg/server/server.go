@@ -3,10 +3,11 @@ package server
 
 import (
 	"darvaza.org/darvaza/shared/storage"
-	"darvaza.org/resolver"
 	"darvaza.org/sidecar/pkg/sidecar"
 	"darvaza.org/sidecar/pkg/sidecar/horizon"
 	"darvaza.org/slog"
+
+	"darvaza.org/penne/pkg/resolver"
 )
 
 // Server is a Penne server
@@ -20,7 +21,7 @@ type Server struct {
 	// horizons
 	z horizon.Horizons
 	// resolvers
-	res map[string]resolver.Exchanger
+	res map[string]*resolver.Resolver
 	rd  map[string]slog.LogLevel
 }
 
