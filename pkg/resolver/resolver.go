@@ -211,23 +211,44 @@ func (r *Resolver) Lookup(ctx context.Context, qName string, qType uint16) (*dns
 
 // Exchange implements the [resolver.Exchanger] interface.
 func (r *Resolver) Exchange(ctx context.Context, req *dns.Msg) (*dns.Msg, error) {
-	var e resolver.Exchanger
-
-	if ctx == nil || req == nil || len(req.Question) != 1 {
-		return nil, errors.ErrBadRequest()
-	}
-
-	// TODO: rewrites
 	switch {
-	case r.e != nil && r.match(req):
-		e = r.e
-	case r.next != nil:
-		e = r.next
+	case ctx == nil, req == nil, len(req.Question) != 1:
+		// This is unreachable. The server won't pass
+		// bad requests across.
+		return nil, errors.ErrBadRequest()
+	case !r.match(req):
+		// carry on, nothing to see here
+		return r.nextExchange(ctx, req)
+	case len(r.rewrite) == 0:
+		// use our exchanger if available
+		return r.doExchange(ctx, req)
 	default:
-		e = forbiddenExchanger
+		// rewrites involved, time to work
+		return r.rewriteExchange(ctx, req)
+	}
+}
+
+func (*Resolver) rewriteExchange(context.Context, *dns.Msg) (*dns.Msg, error) {
+	// TODO: apply rewrites to questions
+	// TODO: restore questions
+	// TODO: apply rewrites to answers, and ask again if needed.
+	return nil, errors.ErrNotImplemented("")
+}
+
+func (r *Resolver) doExchange(ctx context.Context, req *dns.Msg) (*dns.Msg, error) {
+	if r.e != nil {
+		return r.e.Exchange(ctx, req)
 	}
 
-	return e.Exchange(ctx, req)
+	return r.nextExchange(ctx, req)
+}
+
+func (r *Resolver) nextExchange(ctx context.Context, req *dns.Msg) (*dns.Msg, error) {
+	if r.next != nil {
+		return r.next.Exchange(ctx, req)
+	}
+
+	return forbiddenExchange(ctx, req)
 }
 
 func (r *Resolver) match(req *dns.Msg) bool {
@@ -257,5 +278,3 @@ func forbiddenExchange(_ context.Context, req *dns.Msg) (*dns.Msg, error) {
 	resp.RecursionAvailable = true
 	return resp, nil
 }
-
-var forbiddenExchanger = resolver.ExchangerFunc(forbiddenExchange)
