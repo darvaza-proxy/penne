@@ -152,6 +152,7 @@ type Resolver struct {
 	debug    map[string]slog.LogLevel
 	log      slog.Logger
 	name     string
+	rewrite  Rewriters
 	suffixes suffix.Suffixes
 	w        client.Worker
 	e        resolver.Exchanger

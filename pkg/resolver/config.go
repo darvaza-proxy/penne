@@ -82,10 +82,16 @@ func (rc Config) New(next resolver.Exchanger, opts *Options) (*Resolver, error) 
 		return nil, err
 	}
 
+	rewriters, err := MakeRewriters(rc.Rewrites)
+	if err != nil {
+		return nil, err
+	}
+
 	r := &Resolver{
 		debug:    make(map[string]slog.LogLevel),
 		log:      opts.Logger,
 		name:     rc.Name,
+		rewrite:  rewriters,
 		suffixes: suffixes,
 		next:     next,
 	}
