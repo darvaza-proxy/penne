@@ -12,7 +12,9 @@ import (
 	"darvaza.org/penne/pkg/resolver"
 )
 
-// MakeHorizons builds Horizons from a [Config] slice
+// MakeHorizons builds Horizons from a [Config] slice,
+// and prepares the resolvers to get back to us when
+// they don't know what else to do.
 func MakeHorizons(conf []Config,
 	res map[string]*resolver.Resolver,
 	ctxKey *core.ContextKey[horizon.Match]) ([]string, map[string]*Horizon, error) {
@@ -28,6 +30,13 @@ func MakeHorizons(conf []Config,
 		if err != nil {
 			return nil, nil, err
 		}
+	}
+
+	// hook fallback on all resolvers
+	// so they can find their way back into the
+	// horizons chain.
+	for _, r := range res {
+		r.SetFallback(dnsNextExchanger)
 	}
 
 	return names, out, nil

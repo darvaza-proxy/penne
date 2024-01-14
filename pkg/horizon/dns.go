@@ -8,28 +8,52 @@ import (
 	"darvaza.org/core"
 	"darvaza.org/resolver"
 	"darvaza.org/resolver/pkg/exdns"
+	"darvaza.org/sidecar/pkg/sidecar/horizon"
 )
 
 var _ resolver.Exchanger = (*Horizon)(nil)
 
 // Exchange handles DNS requests passed from another [Horizon].
 func (z *Horizon) Exchange(ctx context.Context, req *dns.Msg) (*dns.Msg, error) {
+	if e := z.res; e != nil {
+		// use explicit resolver with trampoline
+		ctx = dnsNextKey.WithValue(ctx, z.nextExchanger)
+		return e.Exchange(ctx, req)
+	}
+
+	return z.nextExchanger(ctx, req)
+}
+
+func (z *Horizon) nextExchanger(ctx context.Context, req *dns.Msg) (*dns.Msg, error) {
 	var next resolver.Exchanger
 
-	switch {
-	case z.res != nil:
-		// use explicit resolver
-		next = z.res
-	case z.next != nil:
-		// hand-over to the next Horizon
+	if z.next != nil {
+		// next Horizon
 		next = z.next
-	default:
+	} else {
 		// EOL
 		next = z.nextE
 	}
 
 	return next.Exchange(ctx, req)
 }
+
+// dnsNextEx is injected as the fallback on the Resolvers
+// so they can continue to the next Horizon if they don't have
+// anything else defined already.
+func dnsNextEx(ctx context.Context, req *dns.Msg) (*dns.Msg, error) {
+	e, ok := dnsNextKey.Get(ctx)
+	if ok {
+		return e.Exchange(ctx, req)
+	}
+
+	return horizon.ForbiddenExchange(ctx, req)
+}
+
+var (
+	dnsNextKey       = core.NewContextKey[resolver.ExchangerFunc]("penne.horizon.resolver")
+	dnsNextExchanger = resolver.ExchangerFunc(dnsNextEx)
+)
 
 // HorizonExchange handles DNS requests directly from the [dns.Server] when the
 // client belongs in the range.
