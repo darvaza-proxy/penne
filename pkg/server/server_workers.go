@@ -2,6 +2,11 @@ package server
 
 // Serve runs the service
 func (srv *Server) Serve() error {
+	if err := srv.startResolvers(); err != nil {
+		return err
+	}
+	defer srv.cancelResolvers()
+
 	if err := srv.sc.Spawn(srv, srv.cfg.Supervision.HealthWait); err != nil {
 		return err
 	}
@@ -11,5 +16,10 @@ func (srv *Server) Serve() error {
 
 // ListenAndServe listens all ports and runs the service.
 func (srv *Server) ListenAndServe() error {
+	if err := srv.startResolvers(); err != nil {
+		return err
+	}
+	defer srv.cancelResolvers()
+
 	return srv.sc.ListenAndServe(srv)
 }
