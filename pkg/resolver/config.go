@@ -99,19 +99,11 @@ func (rc Config) New(next resolver.Exchanger, opts *Options) (*Resolver, error) 
 }
 
 func (rc Config) setupForwarder(_ *Resolver, _ *Options) error {
-	return &Error{
-		Resolver: rc.Name,
-		Reason:   "forwarder",
-		Err:      core.ErrNotImplemented,
-	}
+	return rc.WrapError(core.ErrNotImplemented, "forwarder")
 }
 
 func (rc Config) setupChained(_ *Resolver, _ *Options) error {
-	return &Error{
-		Resolver: rc.Name,
-		Reason:   "chained resolver",
-		Err:      core.ErrNotImplemented,
-	}
+	return rc.WrapError(core.ErrNotImplemented, "chained resolver")
 }
 
 // NewError creates a new [Error] using the [Config]'s name.

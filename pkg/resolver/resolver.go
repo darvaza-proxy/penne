@@ -77,20 +77,12 @@ func makeResolversMap(conf []Config) ([]string, map[string]Config, error) {
 		rc.Next = strings.ToLower(rc.Next)
 
 		if rc.Name == "" {
-			err := &Error{
-				Resolver: rc.Name,
-				Reason:   "no name",
-				Err:      core.ErrInvalid,
-			}
+			err := rc.WrapError(core.ErrInvalid, "no name")
 			return nil, nil, err
 		}
 
 		if _, ok := out[rc.Name]; ok {
-			err := &Error{
-				Resolver: rc.Name,
-				Reason:   "duplicate name",
-				Err:      core.ErrExists,
-			}
+			err := rc.WrapError(core.ErrExists, "duplicate name")
 			return nil, nil, err
 		}
 
