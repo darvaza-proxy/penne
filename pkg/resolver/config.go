@@ -1,6 +1,8 @@
 package resolver
 
 import (
+	"fmt"
+
 	"darvaza.org/core"
 	"darvaza.org/resolver"
 	"darvaza.org/sidecar/pkg/sidecar/horizon"
@@ -110,6 +112,29 @@ func (rc Config) setupChained(_ *Resolver, _ *Options) error {
 		Reason:   "chained resolver",
 		Err:      core.ErrNotImplemented,
 	}
+}
+
+// NewError creates a new [Error] using the [Config]'s name.
+func (rc Config) NewError(format string, args ...any) *Error {
+	var s string
+	if len(args) > 0 {
+		s = fmt.Sprintf(format, args...)
+	} else {
+		s = format
+	}
+
+	return &Error{
+		Resolver: rc.Name,
+		Reason:   s,
+	}
+}
+
+// WrapError creates a new [Error] using the [Config]'s name, wrapping
+// another error.
+func (rc Config) WrapError(err error, format string, args ...any) error {
+	e := rc.NewError(format, args...)
+	e.Err = err
+	return e
 }
 
 // RewriteConfig describes an expression used to alter a request.
