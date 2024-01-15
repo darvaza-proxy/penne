@@ -42,6 +42,10 @@ type Config struct {
 	// a built-in list of root DNS servers will be used.
 	Servers []string `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
 
+	// Workers indicates how many parallel outward connections we allow
+	// from this resolver. It applies to iterative and forwarding resolvers.
+	Workers uint `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
+
 	// Suffixes indicate what domains will this [Resolver] handle. Globbing patterns allowed.
 	Suffixes []string `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
 

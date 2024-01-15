@@ -8,12 +8,10 @@ import (
 	"darvaza.org/slog"
 )
 
-func (rc Config) newClient(opts *Options) (client.Client, error) {
-	var c, udp, tcp client.Client
-
+func (rc Config) newMuxClient(opts *Options) (client.Client, error) {
 	// UDP/TCP client mux
-	udp = opts.NewClient("udp")
-	tcp = opts.NewClient("tcp")
+	udp := opts.NewClient("udp")
+	tcp := opts.NewClient("tcp")
 	if rc.Debug {
 		udp, _ = reflect.NewWithClient(rc.Name+"-udp", opts.Logger, udp)
 		tcp, _ = reflect.NewWithClient(rc.Name+"-tcp", opts.Logger, tcp)
@@ -25,7 +23,7 @@ func (rc Config) newClient(opts *Options) (client.Client, error) {
 	}
 
 	// DNS over TLS
-	c = opts.NewClient("tcp+tls")
+	c := opts.NewClient("tcp+tls")
 	switch {
 	case c == nil:
 		// not TLS
@@ -39,7 +37,25 @@ func (rc Config) newClient(opts *Options) (client.Client, error) {
 
 	// TODO: add DNS over HTTPS support
 
-	c = mux
+	return mux, nil
+}
+
+func (rc Config) newClient(opts *Options) (client.Worker, client.Client, error) {
+	var w client.Worker
+
+	c, err := rc.newMuxClient(opts)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	if rc.Workers > 0 {
+		w, err = client.NewWorkerPool(c, int(rc.Workers))
+		if err != nil {
+			return nil, nil, err
+		}
+		c = w
+	}
+
 	if rc.DisableAAAA {
 		// remove AAAA entries
 		c = client.NewNoAAAA(c)
@@ -55,7 +71,7 @@ func (rc Config) newClient(opts *Options) (client.Client, error) {
 		c, _ = reflect.NewWithClient(rc.Name+"-mux", opts.Logger, c)
 	}
 
-	return c, nil
+	return w, c, nil
 }
 
 func (rc Config) setupClientDebug(r *Resolver, remote, mux slog.LogLevel) {
