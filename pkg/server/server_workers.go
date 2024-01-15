@@ -8,3 +8,8 @@ func (srv *Server) Serve() error {
 
 	return srv.sc.Wait()
 }
+
+// ListenAndServe listens all ports and runs the service.
+func (srv *Server) ListenAndServe() error {
+	return srv.sc.ListenAndServe(srv)
+}
