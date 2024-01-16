@@ -3,14 +3,14 @@ module darvaza.org/penne
 go 1.20
 
 require (
-	darvaza.org/core v0.11.4
+	darvaza.org/core v0.12.0
 	darvaza.org/darvaza/shared v0.5.12
 	darvaza.org/darvaza/shared/config v0.2.8
-	darvaza.org/resolver v0.8.0
-	darvaza.org/sidecar v0.3.5
-	darvaza.org/sidecar/pkg/service v0.0.6
-	darvaza.org/slog v0.5.6
-	darvaza.org/slog/handlers/discard v0.4.9
+	darvaza.org/resolver v0.8.2
+	darvaza.org/sidecar v0.3.6
+	darvaza.org/sidecar/pkg/service v0.0.7
+	darvaza.org/slog v0.5.7
+	darvaza.org/slog/handlers/discard v0.4.11
 )
 
 require (
@@ -20,11 +20,11 @@ require (
 )
 
 require (
-	darvaza.org/cache/x/simplelru v0.1.7 // indirect
+	darvaza.org/cache/x/simplelru v0.1.8 // indirect
 	darvaza.org/darvaza/shared/web v0.3.12 // indirect
 	darvaza.org/middleware v0.2.7 // indirect
-	darvaza.org/slog/handlers/filter v0.4.8 // indirect
-	darvaza.org/slog/handlers/zerolog v0.4.8 // indirect
+	darvaza.org/slog/handlers/filter v0.4.9 // indirect
+	darvaza.org/slog/handlers/zerolog v0.4.9 // indirect
 	github.com/BurntSushi/toml v1.3.2 // indirect
 	github.com/amery/defaults v0.1.0 // indirect
 	github.com/cloudflare/tableflip v1.2.3 // indirect
@@ -51,13 +51,13 @@ require (
 	github.com/zeebo/blake3 v0.2.3 // indirect
 	go.uber.org/mock v0.4.0 // indirect
 	golang.org/x/crypto v0.18.0 // indirect
-	golang.org/x/exp v0.0.0-20240110193028-0dcbfd608b1e // indirect
+	golang.org/x/exp v0.0.0-20240112132812-db7319d0e0e3 // indirect
 	golang.org/x/mod v0.14.0 // indirect
 	golang.org/x/net v0.20.0 // indirect
 	golang.org/x/sync v0.6.0 // indirect
 	golang.org/x/sys v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
-	golang.org/x/tools v0.16.1 // indirect
+	golang.org/x/tools v0.17.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	mvdan.cc/sh/v3 v3.7.0 // indirect
 )
