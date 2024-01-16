@@ -28,6 +28,9 @@ type Config struct {
 	// Iterative indicates that this [Resolver] will go straight to the DNS
 	// root servers and ask the authoritative servers for the answers.
 	Iterative bool `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
+	// IterativeMaxRR indicates the maximum number of glue records the Iterative Resolver
+	// will cache.
+	IterativeMaxRR uint `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
 
 	// Recursive indicates that this [Resolver] will ask servers to perform
 	// recursive lookups.
@@ -43,6 +46,19 @@ type Config struct {
 
 	// Rewrites is a list of query name rewrites to be done by this [Resolver].
 	Rewrites []RewriteConfig `yaml:",omitempty" toml:",omitempty" json:",omitempty"`
+}
+
+// SetDefaults fills gaps in the [Config].
+func (rc *Config) SetDefaults() {
+	if rc.Iterative {
+		rc.Recursive = false
+
+		if rc.IterativeMaxRR == 0 {
+			rc.IterativeMaxRR = DefaultIteratorMaxRR
+		}
+	} else {
+		rc.IterativeMaxRR = 0
+	}
 }
 
 // New creates a new [Resolver].
