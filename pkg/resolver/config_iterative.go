@@ -16,20 +16,12 @@ const (
 func (rc Config) setupIterative(r *Resolver, opts *Options) error {
 	c, err := rc.newClient(opts)
 	if err != nil {
-		return &Error{
-			Resolver: rc.Name,
-			Reason:   "failed to create client",
-			Err:      err,
-		}
+		return rc.WrapError(err, "failed to create client")
 	}
 
 	e, err := rc.newIteratorLookuper(c, opts)
 	if err != nil {
-		return &Error{
-			Resolver: rc.Name,
-			Reason:   "failed to create iterative lookuper",
-			Err:      err,
-		}
+		return rc.WrapError(err, "failed to create iterative lookuper")
 	}
 
 	// TODO: add cache
