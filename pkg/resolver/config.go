@@ -5,7 +5,6 @@ import (
 
 	"darvaza.org/core"
 	"darvaza.org/resolver"
-	"darvaza.org/sidecar/pkg/sidecar/horizon"
 	"darvaza.org/slog"
 )
 
@@ -77,9 +76,7 @@ func (rc Config) New(next resolver.Exchanger, opts *Options) (*Resolver, error) 
 		log:      opts.Logger,
 		name:     rc.Name,
 		suffixes: rc.Suffixes,
-
-		Next:      next,
-		Exchanger: resolver.ExchangerFunc(horizon.ForbiddenExchange),
+		next:     next,
 	}
 
 	switch {

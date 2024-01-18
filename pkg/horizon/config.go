@@ -5,8 +5,9 @@ import (
 	"net/netip"
 
 	"darvaza.org/core"
-	"darvaza.org/resolver"
 	"darvaza.org/sidecar/pkg/sidecar/horizon"
+
+	"darvaza.org/penne/pkg/resolver"
 )
 
 // Config describes a [Horizon]
@@ -21,7 +22,7 @@ type Config struct {
 }
 
 // New creates a new [Horizon] from the [Config]
-func (hc Config) New(next *Horizon, res resolver.Exchanger,
+func (hc Config) New(next *Horizon, res *resolver.Resolver,
 	ctxKey *core.ContextKey[horizon.Match]) (*Horizon, error) {
 	//
 	z := &Horizon{

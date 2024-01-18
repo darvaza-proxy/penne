@@ -5,6 +5,7 @@ import (
 
 	"darvaza.org/resolver/pkg/client"
 	"darvaza.org/resolver/pkg/reflect"
+	"darvaza.org/slog"
 )
 
 func (rc Config) newClient(opts *Options) (client.Client, error) {
@@ -55,4 +56,11 @@ func (rc Config) newClient(opts *Options) (client.Client, error) {
 	}
 
 	return c, nil
+}
+
+func (rc Config) setupClientDebug(r *Resolver, remote, mux slog.LogLevel) {
+	r.debug[rc.Name+"-udp"] = remote
+	r.debug[rc.Name+"-tcp"] = remote
+	r.debug[rc.Name+"-tls"] = remote
+	r.debug[rc.Name+"-mux"] = mux
 }
