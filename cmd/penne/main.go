@@ -25,7 +25,7 @@ func main() {
 	code, err := service.AsExitStatus(err)
 
 	if err != nil {
-		mustLogger(nil, nil).Error().
+		newLogger(nil).Error().
 			WithField(slog.ErrorFieldName, err).
 			Print()
 	}

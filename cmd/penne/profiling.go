@@ -13,7 +13,7 @@ func memProfilingInit() {
 
 	mpf := flags.Lookup(memProfileFlag)
 	if mpf.Changed {
-		log := mustLogger(nil, flags)
+		log := newLogger(flags)
 		memProfile := mpf.Value.String()
 
 		log.Info().
@@ -47,7 +47,7 @@ func cpuProfilingInit() {
 
 	cpf := flags.Lookup(cpuProfileFlag)
 	if cpf.Changed {
-		log := mustLogger(nil, flags)
+		log := newLogger(flags)
 		cpuProfile := cpf.Value.String()
 
 		log.Info().
