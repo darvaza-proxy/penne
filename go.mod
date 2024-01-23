@@ -6,15 +6,15 @@ require (
 	darvaza.org/core v0.12.0
 	darvaza.org/darvaza/shared v0.5.12
 	darvaza.org/darvaza/shared/config v0.2.8
-	darvaza.org/resolver v0.8.2
-	darvaza.org/sidecar v0.3.6
+	darvaza.org/resolver v0.9.1
+	darvaza.org/sidecar v0.3.7
 	darvaza.org/sidecar/pkg/service v0.0.7
 	darvaza.org/slog v0.5.7
 	darvaza.org/slog/handlers/discard v0.4.11
 )
 
 require (
-	github.com/miekg/dns v1.1.57
+	github.com/miekg/dns v1.1.58
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/pflag v1.0.5
 )
