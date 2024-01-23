@@ -7,7 +7,8 @@ import (
 	"darvaza.org/sidecar/pkg/glob"
 )
 
-// Compile ...
+// Compile converts an suffix pattern into a
+// an [Suffix].
 func Compile(expr string) (Suffix, error) {
 	switch {
 	case expr == "":
@@ -44,7 +45,8 @@ func compileGlobSuffix(pattern string) (Suffix, error) {
 	return Suffix{g: g}, nil
 }
 
-// Suffix ...
+// Suffix if a domain, or domain pattern, that
+// can be matched against subdomains.
 type Suffix struct {
 	g *glob.Glob
 	l string
@@ -88,7 +90,7 @@ func (ss Suffixes) Match(qName string) bool {
 	return false
 }
 
-// MakeSuffixes ...
+// MakeSuffixes compiles a list of [Suffix]es.
 func MakeSuffixes(suffixes []string) ([]Suffix, error) {
 	out := make([]Suffix, 0, len(suffixes))
 	for _, str := range suffixes {
