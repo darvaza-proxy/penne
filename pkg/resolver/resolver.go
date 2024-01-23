@@ -10,6 +10,7 @@ import (
 
 	"darvaza.org/core"
 	"darvaza.org/resolver"
+	"darvaza.org/resolver/pkg/client"
 	"darvaza.org/resolver/pkg/errors"
 	"darvaza.org/resolver/pkg/exdns"
 	"darvaza.org/slog"
@@ -150,6 +151,7 @@ type Resolver struct {
 	log      slog.Logger
 	name     string
 	suffixes []string
+	w        client.Worker
 	e        resolver.Exchanger
 	next     resolver.Exchanger
 }
@@ -161,6 +163,31 @@ func (r *Resolver) Name() string {
 
 func (r *Resolver) String() string {
 	return fmt.Sprintf("resolver[%q]", r.name)
+}
+
+// Start starts the [Resolver]'s worker.
+func (r *Resolver) Start(ctx context.Context) error {
+	if r != nil && r.w != nil {
+		return r.w.Start(ctx)
+	}
+	return nil
+}
+
+// Cancel initiates a shut down of [Resolver]'s Worker.
+func (r *Resolver) Cancel(err error) bool {
+	if r != nil && r.w != nil {
+		return r.w.Cancel(err)
+	}
+	return false
+}
+
+// Shutdown initiates a shut down of [Resolver]'s Worker,
+// and waits until they are done or the given context expires.
+func (r *Resolver) Shutdown(ctx context.Context) error {
+	if r != nil && r.w != nil {
+		return r.w.Shutdown(ctx)
+	}
+	return nil
 }
 
 func (r *Resolver) copyDebugMap(debug map[string]slog.LogLevel) bool {
