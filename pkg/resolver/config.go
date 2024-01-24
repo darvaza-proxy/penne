@@ -6,6 +6,8 @@ import (
 	"darvaza.org/core"
 	"darvaza.org/resolver"
 	"darvaza.org/slog"
+
+	"darvaza.org/penne/pkg/suffix"
 )
 
 // Config describes a [Resolver].
@@ -71,11 +73,16 @@ func (rc Config) New(next resolver.Exchanger, opts *Options) (*Resolver, error) 
 	}
 	opts.SetDefaults()
 
+	suffixes, err := suffix.MakeSuffixes(rc.Suffixes)
+	if err != nil {
+		return nil, err
+	}
+
 	r := &Resolver{
 		debug:    make(map[string]slog.LogLevel),
 		log:      opts.Logger,
 		name:     rc.Name,
-		suffixes: rc.Suffixes,
+		suffixes: suffixes,
 		next:     next,
 	}
 

@@ -13,6 +13,8 @@ import (
 	"darvaza.org/resolver/pkg/errors"
 	"darvaza.org/resolver/pkg/exdns"
 	"darvaza.org/slog"
+
+	"darvaza.org/penne/pkg/suffix"
 )
 
 var (
@@ -149,7 +151,7 @@ type Resolver struct {
 	debug    map[string]slog.LogLevel
 	log      slog.Logger
 	name     string
-	suffixes []string
+	suffixes suffix.Suffixes
 	e        resolver.Exchanger
 	next     resolver.Exchanger
 }
@@ -187,8 +189,9 @@ func (r *Resolver) Exchange(ctx context.Context, req *dns.Msg) (*dns.Msg, error)
 		return nil, errors.ErrBadRequest()
 	}
 
+	// TODO: rewrites
 	switch {
-	case r.e != nil:
+	case r.e != nil && r.match(req):
 		e = r.e
 	case r.next != nil:
 		e = r.next
@@ -197,6 +200,15 @@ func (r *Resolver) Exchange(ctx context.Context, req *dns.Msg) (*dns.Msg, error)
 	}
 
 	return e.Exchange(ctx, req)
+}
+
+func (r *Resolver) match(req *dns.Msg) bool {
+	if len(r.suffixes) == 0 {
+		return true
+	}
+
+	q := req.Question[0]
+	return r.suffixes.Match(q.Name)
 }
 
 // SetFallback sets the exchanger to use next if it doesn't have
