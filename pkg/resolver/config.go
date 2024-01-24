@@ -95,10 +95,6 @@ func (rc Config) New(next resolver.Exchanger, opts *Options) (*Resolver, error) 
 	return r, nil
 }
 
-func (rc Config) setupForwarder(_ *Resolver, _ *Options) error {
-	return rc.WrapError(core.ErrNotImplemented, "forwarder")
-}
-
 func (rc Config) setupChained(_ *Resolver, _ *Options) error {
 	return rc.WrapError(core.ErrNotImplemented, "chained resolver")
 }
