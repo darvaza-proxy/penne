@@ -24,6 +24,8 @@ darvaza.org/slog/handlers/filter v0.4.9 h1:xD8OBwlJytpiwTSDDZqUuNSOsJuaManXQiOj9
 darvaza.org/slog/handlers/filter v0.4.9/go.mod h1:t+sjcf1c46kAdf1TRiQmop91xlkteZrC4WDXoVwHgP8=
 darvaza.org/slog/handlers/zerolog v0.4.9 h1:08FjRnwRGtJsLLBnbgxVorb/bkgm5QEM/LXD2cxeCbM=
 darvaza.org/slog/handlers/zerolog v0.4.9/go.mod h1:PZYfx6eOxQfD+cXJQp52iwKgcD30QVYHoXxOCojAOdw=
+darvaza.org/x/config v0.2.9 h1:9Fivua+hPgCy5MbBM1b4E38ACCYY4YSmbap4U8uDzrY=
+darvaza.org/x/config v0.2.9/go.mod h1:TB6lz0LotDwdp0s5NgfjEqmbxL2BQBV3VGHIrxEq4Y8=
 github.com/BurntSushi/toml v1.3.2 h1:o7IhLm0Msx3BaB+n3Ag7L8EVlByGnpq14C4YWiu/gL8=
 github.com/BurntSushi/toml v1.3.2/go.mod h1:CxXYINrC8qIiEnFrOxCa7Jy5BFHlXnUU2pbicEuybxQ=
 github.com/amery/defaults v0.1.0 h1:4AhTgLUnj8BPjVRBzg4+/cSCwPWPT6+yWCM4rD6Feyc=

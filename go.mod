@@ -5,12 +5,12 @@ go 1.20
 require (
 	darvaza.org/core v0.12.0
 	darvaza.org/darvaza/shared v0.5.12
-	darvaza.org/darvaza/shared/config v0.2.8
 	darvaza.org/resolver v0.9.1
 	darvaza.org/sidecar v0.3.7
 	darvaza.org/sidecar/pkg/service v0.0.7
 	darvaza.org/slog v0.5.7
 	darvaza.org/slog/handlers/discard v0.4.11
+	darvaza.org/x/config v0.2.9
 )
 
 require (
@@ -21,6 +21,7 @@ require (
 
 require (
 	darvaza.org/cache/x/simplelru v0.1.8 // indirect
+	darvaza.org/darvaza/shared/config v0.2.8 // indirect
 	darvaza.org/darvaza/shared/web v0.3.12 // indirect
 	darvaza.org/middleware v0.2.7 // indirect
 	darvaza.org/slog/handlers/filter v0.4.9 // indirect
