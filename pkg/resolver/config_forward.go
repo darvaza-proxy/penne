@@ -13,7 +13,7 @@ import (
 )
 
 func (rc Config) setupForwarder(r *Resolver, opts *Options) error {
-	c, err := rc.newClient(opts)
+	w, c, err := rc.newClient(opts)
 	if err != nil {
 		return rc.WrapError(err, "failed to create client")
 	}
@@ -35,6 +35,7 @@ func (rc Config) setupForwarder(r *Resolver, opts *Options) error {
 		rc.setupForwardDebug(r)
 	}
 
+	r.w = w
 	r.e = e
 	return nil
 }

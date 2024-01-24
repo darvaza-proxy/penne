@@ -44,6 +44,31 @@ func (srv *Server) initResolvers() error {
 	return nil
 }
 
+func (srv *Server) startResolvers() error {
+	var ok bool
+	defer func() {
+		if !ok {
+			srv.cancelResolvers()
+		}
+	}()
+
+	for _, r := range srv.res {
+		err := r.Start(srv.cfg.Context)
+		if err != nil {
+			return err
+		}
+	}
+
+	ok = true
+	return nil
+}
+
+func (srv *Server) cancelResolvers() {
+	for _, r := range srv.res {
+		_ = r.Cancel(nil)
+	}
+}
+
 func (srv *Server) reflectEnabled(_ context.Context, name string) (slog.LogLevel, bool) {
 	level, ok := srv.rd[name]
 	return level, ok

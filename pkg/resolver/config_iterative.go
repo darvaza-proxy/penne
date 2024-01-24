@@ -14,7 +14,7 @@ const (
 )
 
 func (rc Config) setupIterative(r *Resolver, opts *Options) error {
-	c, err := rc.newClient(opts)
+	w, c, err := rc.newClient(opts)
 	if err != nil {
 		return rc.WrapError(err, "failed to create client")
 	}
@@ -36,6 +36,7 @@ func (rc Config) setupIterative(r *Resolver, opts *Options) error {
 		rc.setupIterativeDebug(r)
 	}
 
+	r.w = w
 	r.e = e
 	return nil
 }

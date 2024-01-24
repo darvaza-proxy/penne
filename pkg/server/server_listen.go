@@ -15,12 +15,7 @@ func (srv *Server) initSidecar() error {
 	return nil
 }
 
-// Listen listens ports
+// Listen listens all ports.
 func (srv *Server) Listen() error {
 	return srv.sc.Listen()
-}
-
-// ListenAndServe listens ports and runs the service
-func (srv *Server) ListenAndServe() error {
-	return srv.sc.ListenAndServe(srv)
 }
