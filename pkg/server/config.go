@@ -5,11 +5,11 @@ import (
 	"net/netip"
 	"time"
 
-	"darvaza.org/darvaza/shared/config"
 	"darvaza.org/sidecar/pkg/sidecar"
 	"darvaza.org/sidecar/pkg/sidecar/store"
 	"darvaza.org/slog"
 	"darvaza.org/slog/handlers/discard"
+	"darvaza.org/x/config"
 
 	"darvaza.org/penne/pkg/horizon"
 	"darvaza.org/penne/pkg/resolver"
