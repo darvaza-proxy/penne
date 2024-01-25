@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -26,12 +25,6 @@ var dumpCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		flags := cmd.Flags()
 
-		ctx := context.TODO()
-		cfg, err := prepareConfig(ctx, flags)
-		if err != nil {
-			return err
-		}
-
 		encFormat, err := flags.GetString(dumpFormatFlag)
 		if err != nil {
 			return err
@@ -42,7 +35,7 @@ var dumpCmd = &cobra.Command{
 			return err
 		}
 
-		_, err = enc.WriteTo(cfg, os.Stdout)
+		_, err = enc.WriteTo(srvConf, os.Stdout)
 		return err
 	},
 }
