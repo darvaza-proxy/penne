@@ -3,14 +3,20 @@ module darvaza.org/penne
 go 1.20
 
 require (
+	darvaza.org/cache/x/simplelru v0.1.8 // indirect
 	darvaza.org/core v0.12.0
 	darvaza.org/darvaza/shared v0.5.12
+	darvaza.org/darvaza/shared/web v0.3.12 // indirect
+	darvaza.org/middleware v0.2.7 // indirect
 	darvaza.org/resolver v0.9.2
 	darvaza.org/sidecar v0.3.9
 	darvaza.org/sidecar/pkg/service v0.0.8
 	darvaza.org/slog v0.5.7
 	darvaza.org/slog/handlers/discard v0.4.11
+	darvaza.org/slog/handlers/filter v0.4.9 // indirect
+	darvaza.org/slog/handlers/zerolog v0.4.9 // indirect
 	darvaza.org/x/config v0.2.9
+	darvaza.org/x/net v0.1.1 // indirect
 )
 
 require (
@@ -20,12 +26,6 @@ require (
 )
 
 require (
-	darvaza.org/cache/x/simplelru v0.1.8 // indirect
-	darvaza.org/darvaza/shared/web v0.3.12 // indirect
-	darvaza.org/middleware v0.2.7 // indirect
-	darvaza.org/slog/handlers/filter v0.4.9 // indirect
-	darvaza.org/slog/handlers/zerolog v0.4.9 // indirect
-	darvaza.org/x/net v0.1.1 // indirect
 	github.com/BurntSushi/toml v1.3.2 // indirect
 	github.com/amery/defaults v0.1.0 // indirect
 	github.com/cloudflare/tableflip v1.2.3 // indirect
