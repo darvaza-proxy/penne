@@ -45,7 +45,14 @@ func setup(cmd *cobra.Command, _ []string) error {
 }
 
 func main() {
-	err := rootCmd.Execute()
+	svc, err := service.Build(rootCmd, serveCmd)
+	if err != nil {
+		newLogger(nil).Fatal().
+			WithField(slog.ErrorFieldName, err).
+			Print("service.Build")
+	}
+
+	err = svc.Execute()
 	code, err := service.AsExitStatus(err)
 
 	if err != nil {

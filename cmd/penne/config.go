@@ -24,7 +24,7 @@ var confLoader = config.Loader[server.Config]{
 }
 
 func getConfig(ctx context.Context, flags *pflag.FlagSet) (*server.Config, error) {
-	log := newLogger(flags)
+	log := getLogger(ctx, flags)
 	init := func(cfg *server.Config) error {
 		cfg.Context = ctx
 		cfg.Logger = log

@@ -19,7 +19,3 @@ var serveCmd = &cobra.Command{
 		return srv.ListenAndServe()
 	},
 }
-
-func init() {
-	rootCmd.AddCommand(serveCmd)
-}

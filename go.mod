@@ -10,12 +10,13 @@ require (
 	darvaza.org/middleware v0.2.7 // indirect
 	darvaza.org/resolver v0.9.2
 	darvaza.org/sidecar v0.3.9
-	darvaza.org/sidecar/pkg/service v0.0.8
+	darvaza.org/sidecar/pkg/service v0.1.0
 	darvaza.org/slog v0.5.7
+	darvaza.org/slog/handlers/cblog v0.5.9 // indirect
 	darvaza.org/slog/handlers/discard v0.4.11
-	darvaza.org/slog/handlers/filter v0.4.9 // indirect
+	darvaza.org/slog/handlers/filter v0.4.9
 	darvaza.org/slog/handlers/zerolog v0.4.9 // indirect
-	darvaza.org/x/config v0.2.9
+	darvaza.org/x/config v0.3.1
 	darvaza.org/x/net v0.1.1 // indirect
 )
 
@@ -40,7 +41,7 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/kardianos/service v1.2.2 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.6 // indirect
-	github.com/leodido/go-urn v1.2.4 // indirect
+	github.com/leodido/go-urn v1.3.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/onsi/ginkgo/v2 v2.15.0 // indirect
