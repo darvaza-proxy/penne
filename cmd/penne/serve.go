@@ -1,8 +1,6 @@
 package main
 
 import (
-	"context"
-
 	"github.com/spf13/cobra"
 
 	"darvaza.org/penne/pkg/server"
@@ -13,13 +11,7 @@ var serveCmd = &cobra.Command{
 	Short: "Run DNS server",
 	Args:  cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		ctx := context.Background()
-		cfg, err := prepareConfig(ctx, cmd.Flags())
-		if err != nil {
-			return err
-		}
-
-		srv, err := server.New(cfg)
+		srv, err := server.New(srvConf)
 		if err != nil {
 			return err
 		}
