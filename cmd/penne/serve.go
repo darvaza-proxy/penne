@@ -1,10 +1,13 @@
 package main
 
 import (
+	"context"
+
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
 	"darvaza.org/penne/pkg/server"
+	"darvaza.org/sidecar/pkg/service"
 )
 
 var serveCmd = &cobra.Command{
@@ -19,6 +22,11 @@ var serveCmd = &cobra.Command{
 
 		return srv.ListenAndServe()
 	},
+}
+
+func setupService(_ context.Context, _ *service.Service, _ *server.Config) error {
+	// TODO: implement
+	return nil
 }
 
 // WantsSyslog tells if the `--syslog` flag was passed

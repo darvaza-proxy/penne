@@ -39,6 +39,12 @@ func setup(cmd *cobra.Command, _ []string) error {
 		return err
 	}
 
+	if svc, ok := service.GetService(ctx); ok {
+		if err := setupService(ctx, svc, cfg); err != nil {
+			return err
+		}
+	}
+
 	// store
 	srvConf = cfg
 	return nil
