@@ -8,6 +8,8 @@ import (
 
 	"darvaza.org/sidecar/pkg/service"
 	"darvaza.org/slog"
+
+	"darvaza.org/penne/pkg/server"
 )
 
 const (
@@ -18,6 +20,28 @@ const (
 var rootCmd = &cobra.Command{
 	Use:   CmdName,
 	Short: "penne resolves names",
+	Args:  cobra.NoArgs,
+
+	PersistentPreRunE: setup,
+
+	SilenceErrors: true,
+	SilenceUsage:  true,
+}
+
+var srvConf *server.Config
+
+func setup(cmd *cobra.Command, _ []string) error {
+	ctx := cmd.Context()
+	flags := cmd.Flags()
+
+	cfg, err := getConfig(ctx, flags)
+	if err != nil {
+		return err
+	}
+
+	// store
+	srvConf = cfg
+	return nil
 }
 
 func main() {
@@ -25,35 +49,10 @@ func main() {
 	code, err := service.AsExitStatus(err)
 
 	if err != nil {
-		mustLogger(nil, nil).Error().
+		newLogger(nil).Error().
 			WithField(slog.ErrorFieldName, err).
 			Print()
 	}
 
 	os.Exit(code)
-}
-
-var onInit []func()
-var onFinalize []func()
-
-func doOnInit(funcs ...func()) {
-	onInit = append(onInit, funcs...)
-}
-
-func doOnFinalize(funcs ...func()) {
-	onFinalize = append(onFinalize, funcs...)
-}
-
-func init() {
-	cobra.OnInitialize(func() {
-		for _, fn := range onInit {
-			fn()
-		}
-	})
-
-	cobra.OnFinalize(func() {
-		for _, fn := range onFinalize {
-			fn()
-		}
-	})
 }

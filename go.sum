@@ -4,7 +4,6 @@ darvaza.org/core v0.12.0 h1:LLtYh9RZJSd0sgPTDocofCc4H5jbutSUQgPbKt+8gcI=
 darvaza.org/core v0.12.0/go.mod h1:47Ydh67KnzjLNu1mzX3r2zpphbxQqEaihMsUq5GflQ4=
 darvaza.org/darvaza/shared v0.5.12 h1:iVJshhh4tpJ6r75+Xd/agjLMS6i+UOy+Ds614sDmgRk=
 darvaza.org/darvaza/shared v0.5.12/go.mod h1:R5A+Y1suIoZlL62q36j1vTo4ct7fxtudv0Z4IHQugag=
-darvaza.org/darvaza/shared/config v0.2.8/go.mod h1:iaKYszSsW2JXduJLQtqlzlpqBz3lc3gJtWppH8yKsDU=
 darvaza.org/darvaza/shared/web v0.3.12 h1:rVeJF/Pu3dIWgXbNrV75mveQMCqdQqTdimv2bdgxofo=
 darvaza.org/darvaza/shared/web v0.3.12/go.mod h1:AQ4236puRzMIcKFy5+wdkVzgKkTrIkmpcSTOdqyit+8=
 darvaza.org/middleware v0.2.7 h1:5oCIOOcVJVCEL1KG9RoCrrPiM8kCOYs85Vh+Lmp775g=

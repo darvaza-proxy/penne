@@ -1,43 +1,37 @@
 package main
 
 import (
-	"io"
-
 	"github.com/spf13/pflag"
 
-	"darvaza.org/core"
 	"darvaza.org/sidecar/pkg/logger/zerolog"
 	"darvaza.org/slog"
 )
 
-func newLogger(w io.Writer, flags *pflag.FlagSet) (slog.Logger, error) {
+func getLogLevel(flags *pflag.FlagSet) slog.LogLevel {
 	level := slog.Error
 
 	if flags != nil {
 		verbosity, err := flags.GetCount(verbosityFlag)
-		if err != nil {
-			return nil, err
-		}
-
-		level += slog.LogLevel(verbosity)
-		switch {
-		case level < slog.Error:
-			level = slog.Error
-		case level > slog.Debug:
-			level = slog.Debug
+		if err == nil {
+			level += slog.LogLevel(verbosity)
+			switch {
+			case level < slog.Error:
+				level = slog.Error
+			case level > slog.Debug:
+				level = slog.Debug
+			}
 		}
 	}
 
-	log := zerolog.New(w, level)
-	return log, nil
+	return level
 }
 
-func mustLogger(w io.Writer, flags *pflag.FlagSet) slog.Logger {
-	log, err := newLogger(w, flags)
-	if err != nil {
-		core.Panic(err)
-	}
-	return log
+func newLogger(flags *pflag.FlagSet) slog.Logger {
+	return newLoggerLevel(getLogLevel(flags))
+}
+
+func newLoggerLevel(level slog.LogLevel) slog.Logger {
+	return zerolog.New(nil, level)
 }
 
 const (
