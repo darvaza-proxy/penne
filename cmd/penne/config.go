@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"io/fs"
+	"path/filepath"
 
 	"github.com/spf13/pflag"
 
@@ -18,12 +20,11 @@ const (
 )
 
 var confLoader = config.Loader[server.Config]{
-	Base:        CmdName,
-	Directories: []string{"."},
-	Extensions:  []string{"conf", "json", "toml", "yaml"},
+	Base:       CmdName,
+	Extensions: []string{"conf", "json", "toml", "yaml"},
 }
 
-func getConfig(ctx context.Context, flags *pflag.FlagSet) (*server.Config, error) {
+func getConfig(ctx context.Context, flags *pflag.FlagSet) (fs.FS, *server.Config, error) {
 	log := getLogger(ctx, flags)
 	init := func(cfg *server.Config) error {
 		cfg.Context = ctx
@@ -35,14 +36,19 @@ func getConfig(ctx context.Context, flags *pflag.FlagSet) (*server.Config, error
 	cfg, err := confLoader.NewFromFlag(flag, init)
 	if err != nil {
 		log.Error().WithField(slog.ErrorFieldName, err).Print("LoadConfigFile")
-		return nil, err
+		return nil, nil, err
 	}
 
-	if s := confLoader.Last(); s != "" {
-		log.Info().WithField("filename", s).Print("config loaded")
+	if fSys, fileName := confLoader.Last(); fileName != "" {
+		log.Info().WithField("filename", fileName).Print("config loaded")
+
+		fSys, err = fs.Sub(fSys, filepath.Dir(fileName))
+		if err == nil {
+			return fSys, cfg, nil
+		}
 	}
 
-	return cfg, nil
+	return nil, cfg, nil
 }
 
 func init() {

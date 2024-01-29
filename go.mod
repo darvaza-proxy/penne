@@ -9,7 +9,7 @@ require (
 	darvaza.org/darvaza/shared/web v0.3.12 // indirect
 	darvaza.org/middleware v0.2.7 // indirect
 	darvaza.org/resolver v0.9.2
-	darvaza.org/sidecar v0.3.9
+	darvaza.org/sidecar v0.4.0
 	darvaza.org/sidecar/pkg/service v0.1.0
 	darvaza.org/slog v0.5.7
 	darvaza.org/slog/handlers/cblog v0.5.9 // indirect

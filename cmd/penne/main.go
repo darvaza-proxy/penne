@@ -34,7 +34,7 @@ func setup(cmd *cobra.Command, _ []string) error {
 	ctx := cmd.Context()
 	flags := cmd.Flags()
 
-	cfg, err := getConfig(ctx, flags)
+	_, cfg, err := getConfig(ctx, flags)
 	if err != nil {
 		return err
 	}
