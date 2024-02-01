@@ -5,6 +5,7 @@ import (
 	"runtime/pprof"
 
 	"darvaza.org/slog"
+	"github.com/spf13/cobra"
 )
 
 func memProfilingInit() {
@@ -12,7 +13,7 @@ func memProfilingInit() {
 
 	mpf := flags.Lookup(memProfileFlag)
 	if mpf.Changed {
-		log := mustLogger(nil, flags)
+		log := newLogger(flags)
 		memProfile := mpf.Value.String()
 
 		log.Info().
@@ -30,7 +31,7 @@ func memProfilingInit() {
 		}
 
 		// Schedule writing of memory profile
-		doOnFinalize(func() {
+		cobra.OnFinalize(func() {
 			defer f.Close()
 			_ = pprof.WriteHeapProfile(f)
 
@@ -46,7 +47,7 @@ func cpuProfilingInit() {
 
 	cpf := flags.Lookup(cpuProfileFlag)
 	if cpf.Changed {
-		log := mustLogger(nil, flags)
+		log := newLogger(flags)
 		cpuProfile := cpf.Value.String()
 
 		log.Info().
@@ -76,7 +77,7 @@ func cpuProfilingInit() {
 		}
 
 		// Schedule stop
-		doOnFinalize(func() {
+		cobra.OnFinalize(func() {
 			pprof.StopCPUProfile()
 			_ = f.Close()
 
@@ -97,6 +98,6 @@ func init() {
 	pFlags.String(cpuProfileFlag, "", "write CPU profile to file")
 	pFlags.String(memProfileFlag, "", "write MEM profile to file")
 
-	doOnInit(cpuProfilingInit)
-	doOnInit(memProfilingInit)
+	cobra.OnInitialize(cpuProfilingInit)
+	cobra.OnInitialize(memProfilingInit)
 }

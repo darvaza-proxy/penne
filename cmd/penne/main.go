@@ -25,35 +25,10 @@ func main() {
 	code, err := service.AsExitStatus(err)
 
 	if err != nil {
-		mustLogger(nil, nil).Error().
+		newLogger(nil).Error().
 			WithField(slog.ErrorFieldName, err).
 			Print()
 	}
 
 	os.Exit(code)
-}
-
-var onInit []func()
-var onFinalize []func()
-
-func doOnInit(funcs ...func()) {
-	onInit = append(onInit, funcs...)
-}
-
-func doOnFinalize(funcs ...func()) {
-	onFinalize = append(onFinalize, funcs...)
-}
-
-func init() {
-	cobra.OnInitialize(func() {
-		for _, fn := range onInit {
-			fn()
-		}
-	})
-
-	cobra.OnFinalize(func() {
-		for _, fn := range onFinalize {
-			fn()
-		}
-	})
 }

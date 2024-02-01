@@ -24,11 +24,7 @@ var confLoader = config.Loader[server.Config]{
 }
 
 func prepareConfig(ctx context.Context, flags *pflag.FlagSet) (*server.Config, error) {
-	log, err := newLogger(nil, flags)
-	if err != nil {
-		return nil, err
-	}
-
+	log := newLogger(flags)
 	init := func(cfg *server.Config) error {
 		cfg.Context = ctx
 		cfg.Logger = log
