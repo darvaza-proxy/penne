@@ -8,6 +8,8 @@ import (
 
 	"darvaza.org/sidecar/pkg/service"
 	"darvaza.org/slog"
+
+	"darvaza.org/penne/pkg/server"
 )
 
 const (
@@ -18,10 +20,39 @@ const (
 var rootCmd = &cobra.Command{
 	Use:   CmdName,
 	Short: "penne resolves names",
+	Args:  cobra.NoArgs,
+
+	PersistentPreRunE: setup,
+
+	SilenceErrors: true,
+	SilenceUsage:  true,
+}
+
+var srvConf *server.Config
+
+func setup(cmd *cobra.Command, _ []string) error {
+	ctx := cmd.Context()
+	flags := cmd.Flags()
+
+	cfg, err := getConfig(ctx, flags)
+	if err != nil {
+		return err
+	}
+
+	// store
+	srvConf = cfg
+	return nil
 }
 
 func main() {
-	err := rootCmd.Execute()
+	svc, err := service.Build(rootCmd, serveCmd)
+	if err != nil {
+		newLogger(nil).Fatal().
+			WithField(slog.ErrorFieldName, err).
+			Print("service.Build")
+	}
+
+	err = svc.Execute()
 	code, err := service.AsExitStatus(err)
 
 	if err != nil {

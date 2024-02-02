@@ -1,10 +1,14 @@
 package main
 
 import (
+	"context"
+
 	"github.com/spf13/pflag"
 
 	"darvaza.org/sidecar/pkg/logger/zerolog"
+	"darvaza.org/sidecar/pkg/service"
 	"darvaza.org/slog"
+	"darvaza.org/slog/handlers/filter"
 )
 
 func getLogLevel(flags *pflag.FlagSet) slog.LogLevel {
@@ -24,6 +28,24 @@ func getLogLevel(flags *pflag.FlagSet) slog.LogLevel {
 	}
 
 	return level
+}
+
+func getSystemLogger(ctx context.Context, flags *pflag.FlagSet) slog.Logger {
+	svc, _ := service.GetService(ctx)
+	if svc != nil {
+		if !svc.Interactive() || WantsSyslog(flags) {
+			return svc.SystemLogger()
+		}
+	}
+	return nil
+}
+
+func getLogger(ctx context.Context, flags *pflag.FlagSet) slog.Logger {
+	level := getLogLevel(flags)
+	if log := getSystemLogger(ctx, flags); log != nil {
+		return filter.New(log, level)
+	}
+	return newLoggerLevel(level)
 }
 
 func newLogger(flags *pflag.FlagSet) slog.Logger {

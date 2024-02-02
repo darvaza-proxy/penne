@@ -23,8 +23,8 @@ var confLoader = config.Loader[server.Config]{
 	Extensions:  []string{"conf", "json", "toml", "yaml"},
 }
 
-func prepareConfig(ctx context.Context, flags *pflag.FlagSet) (*server.Config, error) {
-	log := newLogger(flags)
+func getConfig(ctx context.Context, flags *pflag.FlagSet) (*server.Config, error) {
+	log := getLogger(ctx, flags)
 	init := func(cfg *server.Config) error {
 		cfg.Context = ctx
 		cfg.Logger = log

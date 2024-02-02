@@ -1,9 +1,8 @@
 package main
 
 import (
-	"context"
-
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 
 	"darvaza.org/penne/pkg/server"
 )
@@ -13,13 +12,7 @@ var serveCmd = &cobra.Command{
 	Short: "Run DNS server",
 	Args:  cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		ctx := context.Background()
-		cfg, err := prepareConfig(ctx, cmd.Flags())
-		if err != nil {
-			return err
-		}
-
-		srv, err := server.New(cfg)
+		srv, err := server.New(srvConf)
 		if err != nil {
 			return err
 		}
@@ -28,6 +21,16 @@ var serveCmd = &cobra.Command{
 	},
 }
 
+// WantsSyslog tells if the `--syslog` flag was passed
+// to use the system logger in interactive mode.
+func WantsSyslog(flags *pflag.FlagSet) bool {
+	v, _ := flags.GetBool(syslogFlag)
+	return v
+}
+
+const syslogFlag = "syslog"
+
 func init() {
-	rootCmd.AddCommand(serveCmd)
+	flags := serveCmd.Flags()
+	flags.Bool(syslogFlag, false, "use syslog when running manually")
 }
