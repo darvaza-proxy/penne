@@ -24,6 +24,8 @@ darvaza.org/slog/handlers/cblog v0.5.9 h1:bLcfeZv4Cyu8MqvLLVWu7ugPj4GI0inPatmqfJ
 darvaza.org/slog/handlers/cblog v0.5.9/go.mod h1:+KL6A/OAgiRdMVf3wg37ywdiOaLkCUMt07nQ9RkVKPQ=
 darvaza.org/slog/handlers/discard v0.4.11 h1:wr34OnDoRaMV1eGgW7yUaupQxjkTnuHrJmYRPj64RHM=
 darvaza.org/slog/handlers/discard v0.4.11/go.mod h1:ynxyLmZzZ5mP4ACLhQs4MEuDyhkIzjz6DfBHUjhnIK4=
+darvaza.org/slog/handlers/discard v0.4.12 h1:rkilFDDFmOZ1UABv4aYJs5r9cRLUVXCfVLgbFbmuGRs=
+darvaza.org/slog/handlers/discard v0.4.12/go.mod h1:m5ikFMNA8ZI1z5LQJAR9+0gA/ijID0BhmYogfbpjPrE=
 darvaza.org/slog/handlers/filter v0.4.9 h1:xD8OBwlJytpiwTSDDZqUuNSOsJuaManXQiOj9WEStr8=
 darvaza.org/slog/handlers/filter v0.4.9/go.mod h1:t+sjcf1c46kAdf1TRiQmop91xlkteZrC4WDXoVwHgP8=
 darvaza.org/slog/handlers/filter v0.4.10 h1:EI6qH52xMeH4mVNhW3N9uSNUY4/K6bY2tNhYosW34zs=

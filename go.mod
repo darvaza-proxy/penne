@@ -13,7 +13,7 @@ require (
 	darvaza.org/sidecar/pkg/service v0.1.0
 	darvaza.org/slog v0.5.9
 	darvaza.org/slog/handlers/cblog v0.5.9 // indirect
-	darvaza.org/slog/handlers/discard v0.4.11
+	darvaza.org/slog/handlers/discard v0.4.12
 	darvaza.org/slog/handlers/filter v0.4.10
 	darvaza.org/slog/handlers/zerolog v0.4.9 // indirect
 	darvaza.org/x/config v0.3.1
