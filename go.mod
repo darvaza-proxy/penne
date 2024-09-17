@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	darvaza.org/cache/x/simplelru v0.1.8 // indirect
-	darvaza.org/core v0.14.6
+	darvaza.org/core v0.14.7
 	darvaza.org/darvaza/shared v0.5.12
 	darvaza.org/darvaza/shared/web v0.3.12 // indirect
 	darvaza.org/middleware v0.2.7 // indirect
