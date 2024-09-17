@@ -14,7 +14,7 @@ require (
 	darvaza.org/slog v0.5.9
 	darvaza.org/slog/handlers/cblog v0.5.9 // indirect
 	darvaza.org/slog/handlers/discard v0.4.11
-	darvaza.org/slog/handlers/filter v0.4.9
+	darvaza.org/slog/handlers/filter v0.4.10
 	darvaza.org/slog/handlers/zerolog v0.4.9 // indirect
 	darvaza.org/x/config v0.3.1
 	darvaza.org/x/net v0.1.1 // indirect
