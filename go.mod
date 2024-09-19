@@ -16,7 +16,7 @@ require (
 	darvaza.org/slog/handlers/discard v0.4.12
 	darvaza.org/slog/handlers/filter v0.4.10
 	darvaza.org/slog/handlers/zerolog v0.4.9 // indirect
-	darvaza.org/x/config v0.3.1
+	darvaza.org/x/config v0.3.6
 	darvaza.org/x/net v0.1.1 // indirect
 )
 
@@ -31,17 +31,17 @@ require (
 	github.com/amery/defaults v0.1.0 // indirect
 	github.com/cloudflare/tableflip v1.2.3 // indirect
 	github.com/dlclark/regexp2 v1.10.0 // indirect
-	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.5 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.17.0 // indirect
+	github.com/go-playground/validator/v10 v10.22.1 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/google/pprof v0.0.0-20240117000934-35fc243c5815 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/kardianos/service v1.2.2 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.6 // indirect
-	github.com/leodido/go-urn v1.3.0 // indirect
+	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/onsi/ginkgo/v2 v2.15.0 // indirect
@@ -61,5 +61,5 @@ require (
 	golang.org/x/text v0.18.0 // indirect
 	golang.org/x/tools v0.22.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	mvdan.cc/sh/v3 v3.7.0 // indirect
+	mvdan.cc/sh/v3 v3.8.0 // indirect
 )
