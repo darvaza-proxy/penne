@@ -8,7 +8,7 @@ require (
 	darvaza.org/darvaza/shared v0.6.1
 	darvaza.org/middleware v0.2.9 // indirect
 	darvaza.org/resolver v0.9.2
-	darvaza.org/sidecar v0.3.9
+	darvaza.org/sidecar v0.4.0
 	darvaza.org/sidecar/pkg/service v0.1.0
 	darvaza.org/slog v0.5.11
 	darvaza.org/slog/handlers/cblog v0.5.11 // indirect
