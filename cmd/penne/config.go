@@ -38,7 +38,7 @@ func getConfig(ctx context.Context, flags *pflag.FlagSet) (*server.Config, error
 		return nil, err
 	}
 
-	if s := confLoader.Last(); s != "" {
+	if _, s := confLoader.Last(); s != "" {
 		log.Info().WithField("filename", s).Print("config loaded")
 	}
 
