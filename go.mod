@@ -3,21 +3,23 @@ module darvaza.org/penne
 go 1.21
 
 require (
-	darvaza.org/cache/x/simplelru v0.1.8 // indirect
-	darvaza.org/core v0.14.7
-	darvaza.org/darvaza/shared v0.5.12
-	darvaza.org/darvaza/shared/web v0.3.12 // indirect
-	darvaza.org/middleware v0.2.7 // indirect
+	darvaza.org/cache/x/simplelru v0.1.10 // indirect
+	darvaza.org/core v0.14.10
+	darvaza.org/darvaza/shared v0.6.1
+	darvaza.org/middleware v0.2.9 // indirect
 	darvaza.org/resolver v0.9.2
 	darvaza.org/sidecar v0.3.9
 	darvaza.org/sidecar/pkg/service v0.1.0
-	darvaza.org/slog v0.5.9
-	darvaza.org/slog/handlers/cblog v0.5.9 // indirect
-	darvaza.org/slog/handlers/discard v0.4.12
-	darvaza.org/slog/handlers/filter v0.4.10
-	darvaza.org/slog/handlers/zerolog v0.4.9 // indirect
-	darvaza.org/x/config v0.3.6
-	darvaza.org/x/net v0.1.1 // indirect
+	darvaza.org/slog v0.5.11
+	darvaza.org/slog/handlers/cblog v0.5.11 // indirect
+	darvaza.org/slog/handlers/discard v0.4.14
+	darvaza.org/slog/handlers/filter v0.4.11
+	darvaza.org/slog/handlers/zerolog v0.4.12 // indirect
+	darvaza.org/x/config v0.3.8
+	darvaza.org/x/fs v0.3.3 // indirect
+	darvaza.org/x/net v0.3.5 // indirect
+	darvaza.org/x/web v0.8.7 // indirect
+
 )
 
 require (
@@ -40,7 +42,7 @@ require (
 	github.com/google/pprof v0.0.0-20240117000934-35fc243c5815 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/kardianos/service v1.2.2 // indirect
-	github.com/klauspost/cpuid/v2 v2.2.6 // indirect
+	github.com/klauspost/cpuid/v2 v2.2.8 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
@@ -49,17 +51,17 @@ require (
 	github.com/quic-go/qpack v0.4.0 // indirect
 	github.com/quic-go/qtls-go1-20 v0.4.1 // indirect
 	github.com/quic-go/quic-go v0.40.1 // indirect
-	github.com/rs/zerolog v1.31.0 // indirect
+	github.com/rs/zerolog v1.33.0 // indirect
 	github.com/zeebo/blake3 v0.2.3 // indirect
 	go.uber.org/mock v0.4.0 // indirect
 	golang.org/x/crypto v0.27.0 // indirect
 	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a // indirect
-	golang.org/x/mod v0.18.0 // indirect
+	golang.org/x/mod v0.20.0 // indirect
 	golang.org/x/net v0.29.0 // indirect
 	golang.org/x/sync v0.8.0 // indirect
 	golang.org/x/sys v0.25.0 // indirect
 	golang.org/x/text v0.18.0 // indirect
-	golang.org/x/tools v0.22.0 // indirect
+	golang.org/x/tools v0.24.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	mvdan.cc/sh/v3 v3.8.0 // indirect
 )
