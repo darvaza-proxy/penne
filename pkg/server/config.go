@@ -5,10 +5,10 @@ import (
 	"net/netip"
 	"time"
 
+	"darvaza.org/sidecar/pkg/logger"
 	"darvaza.org/sidecar/pkg/sidecar"
 	"darvaza.org/sidecar/pkg/sidecar/store"
 	"darvaza.org/slog"
-	"darvaza.org/slog/handlers/discard"
 	"darvaza.org/x/config"
 
 	"darvaza.org/penne/pkg/horizon"
@@ -66,7 +66,7 @@ func (cfg *Config) SetDefaults() error {
 	}
 
 	if cfg.Logger == nil {
-		cfg.Logger = discard.New()
+		cfg.Logger = logger.New(nil)
 	}
 
 	if len(cfg.Horizons) == 0 {
