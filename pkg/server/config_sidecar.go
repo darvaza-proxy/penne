@@ -1,11 +1,11 @@
 package server
 
 import (
-	"darvaza.org/darvaza/shared/storage"
 	"darvaza.org/sidecar/pkg/sidecar"
+	"darvaza.org/x/tls"
 )
 
-func (cfg *Config) export(s storage.Store) (*sidecar.Config, error) {
+func (cfg *Config) export(s tls.Store) (*sidecar.Config, error) {
 	scc := &sidecar.Config{
 		Context: cfg.Context,
 		Logger:  cfg.Logger,

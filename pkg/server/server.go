@@ -2,10 +2,10 @@
 package server
 
 import (
-	"darvaza.org/darvaza/shared/storage"
 	"darvaza.org/sidecar/pkg/sidecar"
 	"darvaza.org/sidecar/pkg/sidecar/horizon"
 	"darvaza.org/slog"
+	"darvaza.org/x/tls"
 
 	"darvaza.org/penne/pkg/resolver"
 )
@@ -17,7 +17,7 @@ type Server struct {
 	// sidecar
 	sc *sidecar.Server
 	// TLS
-	tls storage.Store
+	tls tls.Store
 	// horizons
 	z horizon.Horizons
 	// resolvers
