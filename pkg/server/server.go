@@ -27,6 +27,7 @@ type Server struct {
 
 func (srv *Server) init() error {
 	for _, fn := range []func() error{
+		srv.cfg.SetDefaults,
 		srv.initTLS,
 		srv.initSidecar,
 		srv.initResolvers,
@@ -44,10 +45,6 @@ func (srv *Server) init() error {
 func New(cfg *Config) (*Server, error) {
 	if cfg == nil {
 		cfg = new(Config)
-	}
-
-	if err := cfg.SetDefaults(); err != nil {
-		return nil, err
 	}
 
 	srv := &Server{
