@@ -15,7 +15,7 @@ require (
 	darvaza.org/slog/handlers/discard v0.4.14
 	darvaza.org/slog/handlers/filter v0.4.11
 	darvaza.org/slog/handlers/zerolog v0.4.12 // indirect
-	darvaza.org/x/config v0.3.8
+	darvaza.org/x/config v0.3.10
 	darvaza.org/x/fs v0.3.3 // indirect
 	darvaza.org/x/net v0.3.5 // indirect
 	darvaza.org/x/web v0.9.0 // indirect
@@ -33,7 +33,7 @@ require (
 	github.com/amery/defaults v0.1.0 // indirect
 	github.com/cloudflare/tableflip v1.2.3 // indirect
 	github.com/dlclark/regexp2 v1.11.4 // indirect
-	github.com/gabriel-vasile/mimetype v1.4.5 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.6 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.22.1 // indirect
