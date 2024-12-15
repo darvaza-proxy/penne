@@ -10,7 +10,7 @@ require (
 	darvaza.org/resolver v0.9.5
 	darvaza.org/sidecar v0.4.3
 	darvaza.org/sidecar/pkg/service v0.1.0
-	darvaza.org/slog v0.5.12
+	darvaza.org/slog v0.5.14
 	darvaza.org/slog/handlers/cblog v0.5.11 // indirect
 	darvaza.org/slog/handlers/discard v0.4.14
 	darvaza.org/slog/handlers/filter v0.4.11
