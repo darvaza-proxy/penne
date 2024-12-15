@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/pflag"
 
-	"darvaza.org/sidecar/pkg/logger/zerolog"
+	"darvaza.org/sidecar/pkg/logger"
 	"darvaza.org/sidecar/pkg/service"
 	"darvaza.org/slog"
 	"darvaza.org/slog/handlers/filter"
@@ -53,7 +53,7 @@ func newLogger(flags *pflag.FlagSet) slog.Logger {
 }
 
 func newLoggerLevel(level slog.LogLevel) slog.Logger {
-	return zerolog.New(nil, level)
+	return logger.NewWithThreshold(nil, level)
 }
 
 const (
