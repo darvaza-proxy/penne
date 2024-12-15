@@ -18,8 +18,8 @@ darvaza.org/slog/handlers/cblog v0.5.13 h1:0XHqi5mwni0x34VXM0DhMSRuTYT1d9AxgW5II
 darvaza.org/slog/handlers/cblog v0.5.13/go.mod h1:tjbUKxwNPkjh/BjD+0NHOc6eG6XBFnMcmC+dH4+w2Io=
 darvaza.org/slog/handlers/discard v0.4.16 h1:Da0eVJzVhVzw4an17RUw2IyFLU4p8bJPstflGP9x0Mk=
 darvaza.org/slog/handlers/discard v0.4.16/go.mod h1:TwlJEjWsyXyy3IAYk9CCbIgZRPkvjtc7zPbXK7eFkkk=
-darvaza.org/slog/handlers/filter v0.4.11 h1:wZbwhC8KAaTCe+kQYOQd7y4Cj3HzYTlTjPz2yXzOdxA=
-darvaza.org/slog/handlers/filter v0.4.11/go.mod h1:edQfpxMpCMjLpCQUAWoa5A9AKUOqgXTs+9KpVo84K5s=
+darvaza.org/slog/handlers/filter v0.4.13 h1:pBq/9+v9Qp9UVXVSKQRjYuFv5xQaOjld49NPSdcsfnE=
+darvaza.org/slog/handlers/filter v0.4.13/go.mod h1:5o3N2JgMese4scqsFKop9K9J1rKsn6UKqcsqI5XU9V8=
 darvaza.org/slog/handlers/zerolog v0.4.12 h1:nJV54DV4GUHuD61tbGcj5Es7gkrOgym+JLLExfPZprQ=
 darvaza.org/slog/handlers/zerolog v0.4.12/go.mod h1:8fvor2FmuFS8hVL9MwB20HLXSjWq4eqneybEHTCy9l8=
 darvaza.org/x/config v0.3.10 h1:l3wcQhHVbeyYfe5v9VQspQmfbY+fFpNp1yf58kuGYyA=
