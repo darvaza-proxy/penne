@@ -15,7 +15,7 @@ require (
 	darvaza.org/slog/handlers/discard v0.4.14
 	darvaza.org/slog/handlers/filter v0.4.11
 	darvaza.org/slog/handlers/zerolog v0.4.12 // indirect
-	darvaza.org/x/config v0.3.10
+	darvaza.org/x/config v0.3.11
 	darvaza.org/x/fs v0.3.3 // indirect
 	darvaza.org/x/net v0.3.5 // indirect
 	darvaza.org/x/web v0.9.0 // indirect
@@ -33,10 +33,10 @@ require (
 	github.com/amery/defaults v0.1.0 // indirect
 	github.com/cloudflare/tableflip v1.2.3 // indirect
 	github.com/dlclark/regexp2 v1.11.4 // indirect
-	github.com/gabriel-vasile/mimetype v1.4.6 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.7 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.22.1 // indirect
+	github.com/go-playground/validator/v10 v10.23.0 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
@@ -55,7 +55,7 @@ require (
 	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/zeebo/blake3 v0.2.4 // indirect
 	go.uber.org/mock v0.4.0 // indirect
-	golang.org/x/crypto v0.30.0 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56 // indirect
 	golang.org/x/mod v0.20.0 // indirect
 	golang.org/x/net v0.32.0 // indirect
