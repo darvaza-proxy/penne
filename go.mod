@@ -10,11 +10,11 @@ require (
 	darvaza.org/resolver v0.9.5
 	darvaza.org/sidecar v0.4.3
 	darvaza.org/sidecar/pkg/service v0.1.0
-	darvaza.org/slog v0.5.12
-	darvaza.org/slog/handlers/cblog v0.5.11 // indirect
-	darvaza.org/slog/handlers/discard v0.4.14
-	darvaza.org/slog/handlers/filter v0.4.11
-	darvaza.org/slog/handlers/zerolog v0.4.12 // indirect
+	darvaza.org/slog v0.5.14
+	darvaza.org/slog/handlers/cblog v0.5.13 // indirect
+	darvaza.org/slog/handlers/discard v0.4.16
+	darvaza.org/slog/handlers/filter v0.4.13
+	darvaza.org/slog/handlers/zerolog v0.4.14 // indirect
 	darvaza.org/x/config v0.3.11
 	darvaza.org/x/fs v0.3.3 // indirect
 	darvaza.org/x/net v0.3.5 // indirect
@@ -52,7 +52,6 @@ require (
 	github.com/quic-go/qpack v0.4.0 // indirect
 	github.com/quic-go/quic-go v0.42.0 // indirect
 	github.com/rs/zerolog v1.33.0 // indirect
-	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/zeebo/blake3 v0.2.4 // indirect
 	go.uber.org/mock v0.4.0 // indirect
 	golang.org/x/crypto v0.31.0 // indirect
