@@ -16,10 +16,14 @@ darvaza.org/sidecar/pkg/service v0.1.0 h1:3yep/3sGD/D8GRnQvrRoQZNKoDgkwyNkxqzpo+
 darvaza.org/sidecar/pkg/service v0.1.0/go.mod h1:MKLjXoRGiG0ye9/F5Y0pHrm1rBixO/CcKabNu8jwA28=
 darvaza.org/slog v0.5.12 h1:458qJGNShIx9gqUqLoouo6Hnp5OhHzeoab5Z297FfxY=
 darvaza.org/slog v0.5.12/go.mod h1:PQfXbRaX8pGYhD5Xi+vAJBCUlHcmajNjMZGAfrcu7/E=
+darvaza.org/slog v0.5.14 h1:F8+OU0u3GbfNzHaJRT8XWgr07LK2ExFLA1BRks1qtgk=
+darvaza.org/slog v0.5.14/go.mod h1:PQfXbRaX8pGYhD5Xi+vAJBCUlHcmajNjMZGAfrcu7/E=
 darvaza.org/slog/handlers/cblog v0.5.11 h1:1fYuVA8TaqPYv6gGSiiGVlEkgwOZ+gLERZfRYiVhHnY=
 darvaza.org/slog/handlers/cblog v0.5.11/go.mod h1:jrvotbxxOGY260A7IghA/EGj5drYbacsmHIKFbgXbeA=
 darvaza.org/slog/handlers/discard v0.4.14 h1:OQgPzqbzwXohPGlgGQ3/hVaOzjo7TGb8fRauCJB33CI=
 darvaza.org/slog/handlers/discard v0.4.14/go.mod h1:27j2ZBzOy9ekxnT72cDo1LcM+K84JmaVWjM8SugeN8g=
+darvaza.org/slog/handlers/discard v0.4.16 h1:Da0eVJzVhVzw4an17RUw2IyFLU4p8bJPstflGP9x0Mk=
+darvaza.org/slog/handlers/discard v0.4.16/go.mod h1:TwlJEjWsyXyy3IAYk9CCbIgZRPkvjtc7zPbXK7eFkkk=
 darvaza.org/slog/handlers/filter v0.4.11 h1:wZbwhC8KAaTCe+kQYOQd7y4Cj3HzYTlTjPz2yXzOdxA=
 darvaza.org/slog/handlers/filter v0.4.11/go.mod h1:edQfpxMpCMjLpCQUAWoa5A9AKUOqgXTs+9KpVo84K5s=
 darvaza.org/slog/handlers/zerolog v0.4.12 h1:nJV54DV4GUHuD61tbGcj5Es7gkrOgym+JLLExfPZprQ=
