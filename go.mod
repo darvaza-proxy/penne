@@ -6,9 +6,9 @@ require (
 	darvaza.org/cache/x/simplelru v0.1.11 // indirect
 	darvaza.org/core v0.15.4
 	darvaza.org/darvaza/shared v0.6.2
-	darvaza.org/middleware v0.2.10 // indirect
+	darvaza.org/middleware v0.2.11 // indirect
 	darvaza.org/resolver v0.9.6
-	darvaza.org/sidecar v0.5.1
+	darvaza.org/sidecar v0.5.2
 	darvaza.org/sidecar/pkg/service v0.1.3
 	darvaza.org/slog v0.5.14
 	darvaza.org/slog/handlers/cblog v0.5.13 // indirect
@@ -16,9 +16,9 @@ require (
 	darvaza.org/slog/handlers/filter v0.4.13
 	darvaza.org/slog/handlers/zap v0.4.6 // indirect
 	darvaza.org/x/config v0.3.11
-	darvaza.org/x/fs v0.3.6 // indirect
-	darvaza.org/x/net v0.4.0 // indirect
-	darvaza.org/x/web v0.9.2 // indirect
+	darvaza.org/x/fs v0.3.7 // indirect
+	darvaza.org/x/net v0.4.2 // indirect
+	darvaza.org/x/web v0.9.4 // indirect
 
 )
 
