@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	darvaza.org/cache/x/simplelru v0.1.11 // indirect
-	darvaza.org/core v0.15.4
+	darvaza.org/core v0.15.5
 	darvaza.org/darvaza/shared v0.6.2
 	darvaza.org/middleware v0.2.11 // indirect
 	darvaza.org/resolver v0.9.6
@@ -55,7 +55,7 @@ require (
 	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56 // indirect
 	golang.org/x/mod v0.20.0 // indirect
-	golang.org/x/net v0.32.0 // indirect
+	golang.org/x/net v0.33.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
