@@ -4,20 +4,20 @@ go 1.21
 
 require (
 	darvaza.org/cache/x/simplelru v0.1.11 // indirect
-	darvaza.org/core v0.15.5
+	darvaza.org/core v0.15.6
 	darvaza.org/darvaza/shared v0.6.2
 	darvaza.org/middleware v0.2.11 // indirect
-	darvaza.org/resolver v0.9.6
-	darvaza.org/sidecar v0.5.2
-	darvaza.org/sidecar/pkg/service v0.1.4
-	darvaza.org/slog v0.5.14
-	darvaza.org/slog/handlers/cblog v0.5.13 // indirect
-	darvaza.org/slog/handlers/discard v0.4.16
-	darvaza.org/slog/handlers/filter v0.4.13
-	darvaza.org/slog/handlers/zap v0.4.6 // indirect
-	darvaza.org/x/config v0.3.11
-	darvaza.org/x/fs v0.3.7 // indirect
-	darvaza.org/x/net v0.4.2 // indirect
+	darvaza.org/resolver v0.9.7
+	darvaza.org/sidecar v0.5.3
+	darvaza.org/sidecar/pkg/service v0.1.5
+	darvaza.org/slog v0.5.15
+	darvaza.org/slog/handlers/cblog v0.5.14 // indirect
+	darvaza.org/slog/handlers/discard v0.4.17
+	darvaza.org/slog/handlers/filter v0.4.14
+	darvaza.org/slog/handlers/zap v0.4.7 // indirect
+	darvaza.org/x/config v0.3.12
+	darvaza.org/x/fs v0.3.8 // indirect
+	darvaza.org/x/net v0.4.4 // indirect
 	darvaza.org/x/web v0.9.4 // indirect
 
 )
@@ -52,12 +52,12 @@ require (
 	go.uber.org/mock v0.4.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
-	golang.org/x/crypto v0.31.0 // indirect
+	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56 // indirect
 	golang.org/x/mod v0.20.0 // indirect
-	golang.org/x/net v0.33.0 // indirect
+	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
-	golang.org/x/sys v0.28.0 // indirect
+	golang.org/x/sys v0.29.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/tools v0.24.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
