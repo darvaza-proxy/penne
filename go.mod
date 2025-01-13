@@ -3,20 +3,20 @@ module darvaza.org/penne
 go 1.22
 
 require (
-	darvaza.org/cache/x/simplelru v0.1.11 // indirect
-	darvaza.org/core v0.15.6
-	darvaza.org/darvaza/shared v0.6.2
+	darvaza.org/cache/x/simplelru v0.2.0 // indirect
+	darvaza.org/core v0.16.0
+	darvaza.org/darvaza/shared v0.7.0
 	darvaza.org/middleware v0.2.11 // indirect
-	darvaza.org/resolver v0.9.7
+	darvaza.org/resolver v0.10.1
 	darvaza.org/sidecar v0.5.3
-	darvaza.org/sidecar/pkg/service v0.1.5
-	darvaza.org/slog v0.5.15
-	darvaza.org/slog/handlers/cblog v0.5.14 // indirect
-	darvaza.org/slog/handlers/discard v0.4.17
-	darvaza.org/slog/handlers/filter v0.4.14
+	darvaza.org/sidecar/pkg/service v0.2.0
+	darvaza.org/slog v0.6.0
+	darvaza.org/slog/handlers/cblog v0.6.0 // indirect
+	darvaza.org/slog/handlers/discard v0.5.0
+	darvaza.org/slog/handlers/filter v0.5.0
 	darvaza.org/slog/handlers/zap v0.4.7 // indirect
-	darvaza.org/x/config v0.3.12
-	darvaza.org/x/fs v0.3.8 // indirect
+	darvaza.org/x/config v0.4.1
+	darvaza.org/x/fs v0.4.0 // indirect
 	darvaza.org/x/net v0.4.4 // indirect
 	darvaza.org/x/web v0.9.4 // indirect
 
@@ -33,10 +33,10 @@ require (
 	github.com/amery/defaults v0.1.0 // indirect
 	github.com/cloudflare/tableflip v1.2.3 // indirect
 	github.com/dlclark/regexp2 v1.11.4 // indirect
-	github.com/gabriel-vasile/mimetype v1.4.7 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.8 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.23.0 // indirect
+	github.com/go-playground/validator/v10 v10.24.0 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/google/pprof v0.0.0-20231229205709-960ae82b1e42 // indirect
@@ -61,5 +61,5 @@ require (
 	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/tools v0.24.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	mvdan.cc/sh/v3 v3.8.0 // indirect
+	mvdan.cc/sh/v3 v3.10.0 // indirect
 )
