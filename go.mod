@@ -6,19 +6,19 @@ require (
 	darvaza.org/cache/x/simplelru v0.2.0 // indirect
 	darvaza.org/core v0.16.0
 	darvaza.org/darvaza/shared v0.7.0
-	darvaza.org/middleware v0.2.11 // indirect
+	darvaza.org/middleware v0.3.1 // indirect
 	darvaza.org/resolver v0.10.1
-	darvaza.org/sidecar v0.5.3
+	darvaza.org/sidecar v0.6.0
 	darvaza.org/sidecar/pkg/service v0.2.0
 	darvaza.org/slog v0.6.0
 	darvaza.org/slog/handlers/cblog v0.6.0 // indirect
 	darvaza.org/slog/handlers/discard v0.5.0
 	darvaza.org/slog/handlers/filter v0.5.0
-	darvaza.org/slog/handlers/zap v0.4.7 // indirect
+	darvaza.org/slog/handlers/zap v0.5.0 // indirect
 	darvaza.org/x/config v0.4.1
 	darvaza.org/x/fs v0.4.0 // indirect
-	darvaza.org/x/net v0.4.4 // indirect
-	darvaza.org/x/web v0.9.4 // indirect
+	darvaza.org/x/net v0.5.0 // indirect
+	darvaza.org/x/web v0.10.0 // indirect
 
 )
 
@@ -46,8 +46,8 @@ require (
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/onsi/ginkgo/v2 v2.15.0 // indirect
 	github.com/pachyderm/ohmyglob v0.0.0-20210308211843-d5b47775fc36 // indirect
-	github.com/quic-go/qpack v0.4.0 // indirect
-	github.com/quic-go/quic-go v0.42.0 // indirect
+	github.com/quic-go/qpack v0.5.1 // indirect
+	github.com/quic-go/quic-go v0.48.2 // indirect
 	github.com/zeebo/blake3 v0.2.4 // indirect
 	go.uber.org/mock v0.4.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
