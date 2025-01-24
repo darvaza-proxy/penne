@@ -23,7 +23,7 @@ require (
 )
 
 require (
-	github.com/miekg/dns v1.1.62
+	github.com/miekg/dns v1.1.63
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/pflag v1.0.5
 )
