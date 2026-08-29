@@ -19,13 +19,12 @@ require (
 	darvaza.org/x/fs v0.4.0 // indirect
 	darvaza.org/x/net v0.5.0 // indirect
 	darvaza.org/x/web v0.10.0 // indirect
-
 )
 
 require (
 	github.com/miekg/dns v1.1.63
 	github.com/spf13/cobra v1.8.1
-	github.com/spf13/pflag v1.0.5
+	github.com/spf13/pflag v1.0.10
 )
 
 require (
